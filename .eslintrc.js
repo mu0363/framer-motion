@@ -26,6 +26,7 @@ module.exports = {
     "@typescript-eslint",
     "tailwindcss",
     "import",
+    "import-access",
     "unused-imports",
   ],
   rules: {
@@ -39,6 +40,11 @@ module.exports = {
     ],
     "react/jsx-filename-extension": [1, { extensions: [".js", ".jsx", "tsx"] }],
     "unused-imports/no-unused-imports": "warn",
+    "import/prefer-default-export": "off",
+    "import/extensions": "off",
+    "arrow-body-style": "off",
+    "react/jsx-props-no-spreading": "off",
+    "import-access/jsdoc": ["error"],
     "import/order": [
       "error",
       {

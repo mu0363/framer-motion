@@ -1,0 +1,1 @@
+export { WideImage } from "./WideImage";
