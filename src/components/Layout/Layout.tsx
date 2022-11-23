@@ -10,7 +10,7 @@ type Props = {
 /** @package */
 export const Layout: FC<Props> = ({ children }) => {
   return (
-    <div className="font-line">
+    <div className="font-line text-gray-800">
       <Header />
       <main className="mx-auto">{children}</main>
       <Footer />

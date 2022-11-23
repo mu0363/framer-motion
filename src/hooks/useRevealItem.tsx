@@ -10,7 +10,7 @@ export const useRevealItem = () => {
     hidden: { opacity: 0, y: 0 },
     visible: {
       opacity: 1,
-      y: -150,
+      y: -100,
       transition: {
         duration: 1,
         delay: 0.1,

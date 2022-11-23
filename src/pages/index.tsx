@@ -31,8 +31,9 @@ const Home: NextPage = () => {
               <Image
                 src="/image-05.jpg"
                 alt="image"
-                layout="fill"
-                objectFit="cover"
+                fill
+                priority
+                className="object-cover"
               />
             </motion.div>
             <ImageItem />

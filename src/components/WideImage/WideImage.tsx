@@ -19,9 +19,9 @@ export const WideImage: FC = () => {
           <Image
             src="/image-05.jpg"
             alt="image"
-            layout="fill"
-            objectFit="cover"
-            className="grayscale transition duration-300 hover:grayscale-0"
+            fill
+            priority
+            className="object-cover grayscale transition duration-300 hover:grayscale-0"
           />
         </div>
       </motion.div>

@@ -15,13 +15,18 @@ export const ImageItem: FC = () => {
       variants={variants}
       className="text-center text-6xl font-extrabold italic text-green-300"
     >
-      <Image
-        src="/image-05.jpg"
-        alt="image"
-        width={700}
-        height={1000}
-        className="rounded-xl"
-      />
+      <div className="relative h-96 w-1/3">
+        <Image
+          src="/image-05.jpg"
+          alt="image"
+          fill
+          priority
+          sizes="(max-width: 768px) 100vw,
+              (max-width: 1280px) 50vw,
+              33vw"
+          className="rounded-xl object-cover"
+        />
+      </div>
     </motion.div>
   );
 };
