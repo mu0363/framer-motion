@@ -1,14 +1,14 @@
 import Head from "next/head";
 import type { Contents } from "newt-client-js";
 import type { GetStaticProps, NextPage } from "next";
-import type { BlogType } from "src/types";
+import type { NewsType } from "src/types";
 import { AnimatedTitle } from "src/components/Common/AnimatedTitle";
 import { TextItem } from "src/components/Common/TextItem";
 import { MainLayout } from "src/components/Layout/MainLayout";
 import { NewsCard } from "src/components/pages/news/NewsCard";
 import { newtClient } from "src/libs/newtClient";
 
-const News: NextPage<Contents<Omit<BlogType, "author" | "body" | "meta">>> = (
+const News: NextPage<Contents<Omit<NewsType, "author" | "body" | "meta">>> = (
   props
 ) => {
   const { items } = props;
@@ -43,8 +43,8 @@ const News: NextPage<Contents<Omit<BlogType, "author" | "body" | "meta">>> = (
 
 export default News;
 
-export const getStaticProps: GetStaticProps<Contents<BlogType>> = async () => {
-  const data = await newtClient.getContents<BlogType>({
+export const getStaticProps: GetStaticProps<Contents<NewsType>> = async () => {
+  const data = await newtClient.getContents<NewsType>({
     appUid: process.env.NEWT_APP_UID,
     modelUid: process.env.NEWT_ARTICLE_UID,
     query: {

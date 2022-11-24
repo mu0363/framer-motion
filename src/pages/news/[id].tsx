@@ -2,12 +2,12 @@ import { format } from "date-fns";
 import Head from "next/head";
 import Image from "next/image";
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
-import type { BlogType } from "src/types";
+import type { NewsType } from "src/types";
 import { Badge } from "src/components/Badge";
 import { MainLayout } from "src/components/Layout/MainLayout";
 import { newtClient } from "src/libs/newtClient";
 
-const NewsId: NextPage<BlogType> = ({
+const NewsId: NextPage<NewsType> = ({
   _sys,
   title,
   body,
@@ -66,7 +66,7 @@ const NewsId: NextPage<BlogType> = ({
 };
 
 export const getStaticPaths: GetStaticPaths<{ id: string }> = async () => {
-  const { items } = await newtClient.getContents<BlogType>({
+  const { items } = await newtClient.getContents<NewsType>({
     appUid: process.env.NEWT_APP_UID,
     modelUid: process.env.NEWT_ARTICLE_UID,
   });
@@ -77,13 +77,13 @@ export const getStaticPaths: GetStaticPaths<{ id: string }> = async () => {
   };
 };
 
-export const getStaticProps: GetStaticProps<BlogType, { id: string }> = async (
+export const getStaticProps: GetStaticProps<NewsType, { id: string }> = async (
   ctx
 ) => {
   if (!ctx.params) {
     return { notFound: true };
   }
-  const data = await newtClient.getContent<BlogType>({
+  const data = await newtClient.getContent<NewsType>({
     appUid: process.env.NEWT_APP_UID,
     modelUid: process.env.NEWT_ARTICLE_UID,
     contentId: ctx.params.id,
