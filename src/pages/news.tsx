@@ -1,10 +1,10 @@
 import { motion } from "framer-motion";
 import Head from "next/head";
 import Image from "next/image";
-import { TextItem } from "../components/TextItem";
 import type { NextPage } from "next";
-import { AnimatedTitle } from "src/components/AnimatedTitle";
-import { Layout } from "src/components/Layout";
+import { AnimatedTitle } from "src/components/Common/AnimatedTitle";
+import { TextItem } from "src/components/Common/TextItem";
+import { MainLayout } from "src/components/Layout/MainLayout";
 import { useRevealImage } from "src/hooks/useRevealImage";
 
 const NewsImage = () => {
@@ -53,7 +53,7 @@ const News: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Layout>
+      <MainLayout>
         <section className="flex flex-col px-5 xl:px-20">
           <div className="h-60 xl:h-64" />
           <TextItem text="NEWS" />
@@ -69,7 +69,7 @@ const News: NextPage = () => {
             <NewsImage />
           </div>
         </section>
-      </Layout>
+      </MainLayout>
     </>
   );
 };

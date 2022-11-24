@@ -1,8 +1,8 @@
 import Head from "next/head";
-import { TextItem } from "../components/TextItem";
 import type { NextPage } from "next";
-import { ImageItem } from "src/components/ImageItem";
-import { Layout } from "src/components/Layout";
+import { ImageItem } from "src/components/Common/ImageItem";
+import { TextItem } from "src/components/Common/TextItem";
+import { MainLayout } from "src/components/Layout/MainLayout";
 
 const About: NextPage = () => {
   return (
@@ -13,7 +13,7 @@ const About: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Layout>
+      <MainLayout>
         <h1 className="text-6xl font-bold">About</h1>
         <section className="mb-40 flex flex-col space-y-12">
           <ImageItem />
@@ -23,7 +23,7 @@ const About: NextPage = () => {
           <TextItem text="ようこそ、ここからの世界へ。" />
           <TextItem text="次の文字は" />
         </section>
-      </Layout>
+      </MainLayout>
     </>
   );
 };

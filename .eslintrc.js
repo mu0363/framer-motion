@@ -45,6 +45,13 @@ module.exports = {
     "arrow-body-style": "off",
     "react/jsx-props-no-spreading": "off",
     "import-access/jsdoc": ["error"],
+    "react/require-default-props": [
+      "error",
+      {
+        forbidDefaultForRequired: true,
+        functions: "defaultArguments",
+      },
+    ],
     "import/order": [
       "error",
       {

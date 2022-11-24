@@ -2,9 +2,9 @@ import { LightBulbIcon } from "@heroicons/react/24/solid";
 import { MediaQuery, Tabs } from "@mantine/core";
 import Head from "next/head";
 
-import { TextItem } from "../components/TextItem";
+import { TextItem } from "../components/Common/TextItem";
 import type { NextPage } from "next";
-import { Layout } from "src/components/Layout";
+import { MainLayout } from "src/components/Layout/MainLayout";
 import { QuestionAccordion } from "src/components/QuestionAccordion";
 
 const questionsList = [
@@ -138,7 +138,7 @@ const Question: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Layout>
+      <MainLayout>
         <section className="mb-[140px] flex flex-col px-5 xl:px-20">
           <div className="h-[320px]" />
           <TextItem text="QUESTION" />
@@ -182,7 +182,7 @@ const Question: NextPage = () => {
             </div>
           ))}
         </section>
-      </Layout>
+      </MainLayout>
     </>
   );
 };

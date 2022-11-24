@@ -15,7 +15,7 @@ export const WideImage: FC = () => {
         animate={control}
         variants={variants}
       >
-        <div className="relative h-[600px] w-screen">
+        <div className="relative h-44 w-screen md:h-72 lg:h-[30em]">
           <Image
             src="/image-05.jpg"
             alt="image"

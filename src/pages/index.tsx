@@ -1,11 +1,11 @@
 import { motion } from "framer-motion";
 import Head from "next/head";
 import Image from "next/image";
-import { TextItem } from "../components/TextItem";
 import type { NextPage } from "next";
-import { ImageItem } from "src/components/ImageItem";
-import { Layout } from "src/components/Layout";
-import { WideImage } from "src/components/WideImage";
+import { ImageItem } from "src/components/Common/ImageItem";
+import { TextItem } from "src/components/Common/TextItem";
+import { WideImage } from "src/components/Common/WideImage";
+import { MainLayout } from "src/components/Layout/MainLayout";
 
 const Home: NextPage = () => {
   return (
@@ -16,7 +16,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Layout>
+      <MainLayout>
         <main>
           <section className="mb-40 flex flex-col space-y-12">
             <motion.div
@@ -47,7 +47,7 @@ const Home: NextPage = () => {
           <WideImage />
           <WideImage />
         </main>
-      </Layout>
+      </MainLayout>
     </>
   );
 };
