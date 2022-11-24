@@ -45,6 +45,9 @@ module.exports = {
     "arrow-body-style": "off",
     "react/jsx-props-no-spreading": "off",
     "import-access/jsdoc": ["error"],
+    "react/prop-types": "off",
+    "no-underscore-dangle": "off",
+    "global-require": "off",
     "react/require-default-props": [
       "error",
       {

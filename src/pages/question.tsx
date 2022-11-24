@@ -1,11 +1,10 @@
 import { LightBulbIcon } from "@heroicons/react/24/solid";
 import { MediaQuery, Tabs } from "@mantine/core";
 import Head from "next/head";
-
 import { TextItem } from "../components/Common/TextItem";
 import type { NextPage } from "next";
 import { MainLayout } from "src/components/Layout/MainLayout";
-import { QuestionAccordion } from "src/components/QuestionAccordion";
+import { QuestionAccordion } from "src/components/pages/question/QuestionAccordion";
 
 const questionsList = [
   {

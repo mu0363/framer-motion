@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import type { FC, ReactNode } from "react";
 import { Footer } from "src/components/Layout/Footer";
 import { Header } from "src/components/Layout/Header";
-import { ContactFormButton } from "src/components/contact/ContactFormButton";
+import { ContactFormButton } from "src/components/pages/contact/ContactFormButton";
 
 type Props = {
   children: ReactNode;

@@ -2,7 +2,7 @@ import Head from "next/head";
 import React from "react";
 import { TextItem } from "src/components/Common/TextItem";
 import { MainLayout } from "src/components/Layout/MainLayout";
-import { ContactForm } from "src/components/contact/ContactForm";
+import { ContactForm } from "src/components/pages/contact/ContactForm";
 
 const Contact = () => {
   return (

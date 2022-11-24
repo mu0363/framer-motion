@@ -23,4 +23,12 @@
     font-weight: 800;
     font-style: extrabold;
   }
+
+  h2 {
+    @apply !font-bold !text-2xl;
+  }
+
+  h3 {
+    @apply !font-bold !text-xl;
+  }
 }
