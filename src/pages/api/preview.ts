@@ -17,7 +17,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   res.setPreviewData({});
 
   // 取得した情報からパスを指定してリダイレクトする
-  res.redirect(`/news/${news.slug}`);
+  // res.redirect(`/news/${news.slug}`);
 
   return null;
 };
