@@ -13,7 +13,7 @@ export const Header: FC = () => {
       <ul className="flex items-center justify-center space-x-8 text-center">
         <MenuItem title="QUESTION" width={83} delay={0} />
         <MenuItem title="ABOUT" width={57} delay={0.1} />
-        <MenuItem title="NEWS" width={48} delay={0.2} />
+        <MenuItem title="ARTICLE" width={48} delay={0.2} />
         <MenuItem title="LINK" width={36} delay={0.3} />
       </ul>
     </header>

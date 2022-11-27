@@ -7,7 +7,7 @@ import { Badge } from "src/components/Badge";
 import { MainLayout } from "src/components/Layout/MainLayout";
 import { getArticleById, newtClient } from "src/libs/newtClient";
 
-const ArticleId: NextPage<ArticleType> = ({
+const ArticleDetail: NextPage<ArticleType> = ({
   _sys,
   title,
   body,
@@ -113,4 +113,4 @@ export const getStaticProps: GetStaticProps<
 //   };
 // };
 
-export default ArticleId;
+export default ArticleDetail;
