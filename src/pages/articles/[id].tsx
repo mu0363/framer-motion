@@ -70,7 +70,7 @@ export const getStaticPaths: GetStaticPaths<{ id: string }> = async () => {
     appUid: process.env.NEWT_APP_UID,
     modelUid: process.env.NEWT_ARTICLE_UID,
   });
-  const ids = items.map((item) => `/news/${item._id}`);
+  const ids = items.map((item) => `/articles/${item._id}`);
   return {
     paths: ids,
     fallback: false,

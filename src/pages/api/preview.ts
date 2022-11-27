@@ -19,7 +19,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   res.setPreviewData({});
 
   // 取得した情報からパスを指定してリダイレクトする
-  res.redirect(`/news/${news._id}`);
+  res.redirect(`/articles/${news._id}`);
 };
 
 export default handler;
