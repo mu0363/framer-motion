@@ -1,5 +1,5 @@
 import { createClient } from "newt-client-js";
-import { NewsType } from "src/types";
+import { ArticleType } from "src/types";
 
 // Newt CDN APIのクライアント（公開コンテンツのみ取得）
 export const newtClient = createClient({
@@ -15,15 +15,16 @@ const newtApiClient = createClient({
   apiType: "api",
 });
 
-export async function getArticleBySlug(
-  slug: string,
+export async function getArticleById(
+  id: string,
   preview: boolean
-): Promise<NewsType | null> {
+): Promise<ArticleType | null> {
   const client = preview ? newtApiClient : newtClient;
-  const news = await client.getFirstContent<NewsType>({
+  const news = await client.getFirstContent<ArticleType>({
     appUid: process.env.NEWT_APP_UID,
     modelUid: process.env.NEWT_ARTICLE_UID,
-    query: { slug },
+    query: { _id: id },
   });
+
   return news;
 }

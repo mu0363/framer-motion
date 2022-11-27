@@ -3,14 +3,14 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import type { FC } from "react";
-import type { NewsType } from "src/types";
+import type { ArticleType } from "src/types";
 import { Badge } from "src/components/Badge";
 import { useRevealImage } from "src/hooks/useRevealImage";
 
-type Props = Omit<NewsType, "author" | "body" | "meta">;
+type Props = Omit<ArticleType, "author" | "body" | "meta">;
 
 /** @package */
-export const NewsCard: FC<Props> = ({
+export const ArticleCard: FC<Props> = ({
   categories,
   coverImage,
   title,

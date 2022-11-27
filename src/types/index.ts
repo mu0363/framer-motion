@@ -1,6 +1,6 @@
 import type { Content } from "newt-client-js";
 
-export type NewsType = Content & {
+export type ArticleType = Content & {
   title: string;
   body: string;
   meta: [

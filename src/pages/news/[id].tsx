@@ -2,12 +2,12 @@ import { format } from "date-fns";
 import Head from "next/head";
 import Image from "next/image";
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
-import type { NewsType } from "src/types";
+import type { ArticleType } from "src/types";
 import { Badge } from "src/components/Badge";
 import { MainLayout } from "src/components/Layout/MainLayout";
-import { newtClient } from "src/libs/newtClient";
+import { getArticleById, newtClient } from "src/libs/newtClient";
 
-const NewsId: NextPage<NewsType> = ({
+const ArticleId: NextPage<ArticleType> = ({
   _sys,
   title,
   body,
@@ -66,7 +66,7 @@ const NewsId: NextPage<NewsType> = ({
 };
 
 export const getStaticPaths: GetStaticPaths<{ id: string }> = async () => {
-  const { items } = await newtClient.getContents<NewsType>({
+  const { items } = await newtClient.getContents<ArticleType>({
     appUid: process.env.NEWT_APP_UID,
     modelUid: process.env.NEWT_ARTICLE_UID,
   });
@@ -77,21 +77,40 @@ export const getStaticPaths: GetStaticPaths<{ id: string }> = async () => {
   };
 };
 
-export const getStaticProps: GetStaticProps<NewsType, { id: string }> = async (
-  ctx
-) => {
+export const getStaticProps: GetStaticProps<
+  ArticleType,
+  { id: string }
+> = async (ctx) => {
   if (!ctx.params) {
     return { notFound: true };
   }
-  const data = await newtClient.getContent<NewsType>({
+  const data = await newtClient.getContent<ArticleType>({
     appUid: process.env.NEWT_APP_UID,
     modelUid: process.env.NEWT_ARTICLE_UID,
     contentId: ctx.params.id,
   });
+
+  const { params, preview = false } = ctx;
+  const previewData = await getArticleById(params.id, preview);
+  console.info(previewData);
 
   return {
     props: data,
   };
 };
 
-export default NewsId;
+// export const getStaticProps: GetStaticProps<
+//   ArticleType,
+//   { id: string }
+// > = async (ctx) => {
+//   if (!ctx.params) {
+//     return { notFound: true };
+//   }
+//   const { params, preview = false } = ctx;
+//   const data = await getArticleById(params.id, preview);
+//   return {
+//     props: data,
+//   };
+// };
+
+export default ArticleId;
