@@ -13,7 +13,7 @@ export const MainLayout: FC<Props> = ({ children }) => {
   const router = useRouter();
 
   return (
-    <div className="font-line text-gray-800">
+    <div className="text-gray-800">
       <Header />
 
       <main className="mx-auto h-full">{children}</main>

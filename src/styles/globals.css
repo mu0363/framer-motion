@@ -3,27 +3,6 @@
 @tailwind utilities;
 
 @layer base {
-  @font-face {
-    font-family: "LINESeedJP";
-    src: url("/fonts/LINESeedJP_OTF_Rg.woff2") format("woff2");
-    font-weight: 400;
-    font-style: normal;
-  }
-
-  @font-face {
-    font-family: "LINESeedJP";
-    src: url("/fonts/LINESeedJP_OTF_Bd.woff2") format("woff2");
-    font-weight: 700;
-    font-style: bold;
-  }
-
-  @font-face {
-    font-family: "LINESeedJP";
-    src: url("/fonts/LINESeedJP_OTF_Eb.woff2") format("woff2");
-    font-weight: 800;
-    font-style: extrabold;
-  }
-
   h2 {
     @apply !font-bold !text-2xl;
   }

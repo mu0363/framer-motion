@@ -28,17 +28,12 @@ export const QuestionAccordion: FC<Props> = ({ contents }) => {
                   <ThemeIcon radius="xl" variant="outline" size="sm">
                     ?
                   </ThemeIcon>
-                  <p className="font-line text-base  text-gray-800 md:text-lg">
-                    {label}
-                  </p>
+                  <p className="text-base  text-gray-800 md:text-lg">{label}</p>
                 </Group>
               </Accordion.Control>
               <Accordion.Panel>
                 {description.split("\n").map((splitDescription) => (
-                  <p
-                    key={splitDescription}
-                    className="font-line text-sm md:text-base"
-                  >
+                  <p key={splitDescription} className="text-sm md:text-base">
                     {splitDescription}
                     <br />
                   </p>
