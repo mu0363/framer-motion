@@ -17,7 +17,7 @@ export const ImageItem: FC = () => {
     >
       <div className="relative h-96 w-1/3">
         <Image
-          src="/image-05.jpg"
+          src="/image-05_small.webp"
           alt="image"
           fill
           priority
