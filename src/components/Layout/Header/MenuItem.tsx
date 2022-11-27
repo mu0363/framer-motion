@@ -5,11 +5,10 @@ import type { FC } from "react";
 type Props = {
   title: string;
   width: number;
-  delay: number;
 };
 
 /** @package */
-export const MenuItem: FC<Props> = ({ title, width, delay }) => {
+export const MenuItem: FC<Props> = ({ title, width }) => {
   const underbarMotion = {
     rest: { width: 0, ease: "easeOut", duration: 0.2, type: "tween" },
     hover: {
@@ -23,15 +22,9 @@ export const MenuItem: FC<Props> = ({ title, width, delay }) => {
   };
 
   return (
-    <motion.div
-      initial={{ y: 20, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ delay, type: "tween", ease: "easeOut", duration: 1.2 }}
-    >
-      <motion.li initial="rest" whileHover="hover" className="cursor-pointer">
-        <Link href={`/${title.toLowerCase()}`}>{title}</Link>
-        <motion.div variants={underbarMotion} className="h-0.5 bg-black" />
-      </motion.li>
-    </motion.div>
+    <motion.li initial="rest" whileHover="hover" className="cursor-pointer">
+      <Link href={`/${title.toLowerCase()}`}>{title}</Link>
+      <motion.div variants={underbarMotion} className="h-0.5 bg-black" />
+    </motion.li>
   );
 };
