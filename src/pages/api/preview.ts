@@ -6,7 +6,11 @@ import { getArticleById } from "src/libs/newtClient";
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   // secretを検証する、idパラメータの有無を検証する
   if (req.query.secret !== process.env.PREVIEW_SECRET || !req.query.id) {
-    return res.status(401).json({ message: "Invalid token" });
+    return res
+      .status(401)
+      .json({
+        message: `Invalid token:  secret:${req.query.secret}, id: ${req.query.id}`,
+      });
   }
 
   // idと対応するコンテンツがあるか検証する
