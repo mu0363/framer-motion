@@ -5,7 +5,7 @@ import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import type { ArticleType } from "src/types";
 import { Badge } from "src/components/Badge";
 import { MainLayout } from "src/components/Layout/MainLayout";
-import { getArticleById, newtClient } from "src/libs/newtClient";
+import { newtClient } from "src/libs/newtClient";
 
 const ArticleDetail: NextPage<ArticleType> = ({
   _sys,
@@ -89,10 +89,6 @@ export const getStaticProps: GetStaticProps<
     modelUid: process.env.NEWT_ARTICLE_UID,
     contentId: ctx.params.id,
   });
-
-  const { params, preview = false } = ctx;
-  const previewData = await getArticleById(params.id, preview);
-  console.info(previewData);
 
   return {
     props: data,
