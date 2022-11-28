@@ -5,13 +5,13 @@ import type { ArticleType } from "src/types";
 import { AnimatedTitle } from "src/components/Common/AnimatedTitle";
 import { TextItem } from "src/components/Common/TextItem";
 import { MainLayout } from "src/components/Layout/MainLayout";
-import { ArticleCard } from "src/components/pages/articles/ArticleCard";
+import { ArticleCard } from "src/components/pages/article/ArticleCard";
 import { newtClient } from "src/libs/newtClient";
 
 const Article: NextPage<
   Contents<Omit<ArticleType, "author" | "body" | "meta">>
 > = (props) => {
-  const { items } = props;
+  const { items, total } = props;
   return (
     <>
       <Head>
@@ -24,7 +24,7 @@ const Article: NextPage<
         <section className="flex flex-col px-5 xl:px-20">
           <div className="h-60 xl:h-64" />
           <TextItem text="Article" />
-          <AnimatedTitle />
+          <AnimatedTitle text={`Articles Number: ${total}`} />
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 ">
             {items.map((item) => {
               const { _id } = item;

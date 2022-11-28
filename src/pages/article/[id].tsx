@@ -70,7 +70,7 @@ export const getStaticPaths: GetStaticPaths<{ id: string }> = async () => {
     appUid: process.env.NEWT_APP_UID,
     modelUid: process.env.NEWT_ARTICLE_UID,
   });
-  const ids = items.map((item) => `/articles/${item._id}`);
+  const ids = items.map((item) => `/article/${item._id}`);
   return {
     paths: ids,
     fallback: false,
@@ -94,19 +94,5 @@ export const getStaticProps: GetStaticProps<
     props: data,
   };
 };
-
-// export const getStaticProps: GetStaticProps<
-//   ArticleType,
-//   { id: string }
-// > = async (ctx) => {
-//   if (!ctx.params) {
-//     return { notFound: true };
-//   }
-//   const { params, preview = false } = ctx;
-//   const data = await getArticleById(params.id, preview);
-//   return {
-//     props: data,
-//   };
-// };
 
 export default ArticleDetail;

@@ -20,7 +20,7 @@ export const ArticleCard: FC<Props> = ({
   const { ref, variants, control } = useRevealImage();
 
   return (
-    <Link href={`/articles/${_id}`}>
+    <Link href={`/article/${_id}`}>
       <motion.div
         ref={ref}
         initial="hidden"
