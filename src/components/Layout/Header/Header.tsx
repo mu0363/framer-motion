@@ -13,7 +13,7 @@ export const Header: FC = () => {
       <ul className="flex items-center justify-center space-x-8 text-center">
         <MenuItem title="QUESTION" width={83} />
         <MenuItem title="ABOUT" width={57} />
-        <MenuItem title="ARTICLE" width={48} />
+        <MenuItem title="ARTICLE/PAGE/1" width={48} />
         <MenuItem title="LINK" width={36} />
       </ul>
     </header>
