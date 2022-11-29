@@ -1,21 +1,30 @@
+import { Pagination } from "@mantine/core";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import type { ArticleType } from "src/types";
-import { Pagination } from "@components/Layout/Pagination";
-import { AnimatedTitle } from "src/components/Common/AnimatedTitle";
+import { PER_PAGE } from "@libs/constant";
 import { TextItem } from "src/components/Common/TextItem";
 import { MainLayout } from "src/components/Layout/MainLayout";
 import { ArticleCard } from "src/components/pages/article/ArticleCard";
 import { newtClient } from "src/libs/newtClient";
 
-export const PER_PAGE = 4;
-
 type Props = {
   articles: ArticleType[];
   totalCount: number;
+  pageRange: number;
 };
 
-const ArticlePage: NextPage<Props> = ({ articles, totalCount }) => {
+const ArticlePage: NextPage<Props> = ({ articles, totalCount, pageRange }) => {
+  const router = useRouter();
+  const handlePaginate = (page: number) => {
+    if (page === 1) {
+      router.push("/article/page/1");
+    } else {
+      router.push(`${page}`);
+    }
+  };
+
   return (
     <>
       <Head>
@@ -28,7 +37,7 @@ const ArticlePage: NextPage<Props> = ({ articles, totalCount }) => {
         <section className="flex flex-col px-5 xl:px-20">
           <div className="h-60 xl:h-64" />
           <TextItem text="Article" />
-          <AnimatedTitle text={`Articles Number: ${totalCount}`} />
+          <p>{`total: ${totalCount}`}</p>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 ">
             {articles.map((item) => {
               const { _id } = item;
@@ -39,7 +48,12 @@ const ArticlePage: NextPage<Props> = ({ articles, totalCount }) => {
               );
             })}
           </div>
-          <Pagination totalCount={totalCount} />
+          <Pagination
+            total={pageRange}
+            color="cyan"
+            radius="md"
+            onChange={handlePaginate}
+          />
         </section>
       </MainLayout>
     </>
@@ -52,6 +66,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     modelUid: process.env.NEWT_ARTICLE_UID,
     query: {
       select: ["_id"],
+      limit: 1,
     },
   });
 
@@ -83,10 +98,16 @@ export const getStaticProps: GetStaticProps<Props> = async (ctx) => {
     },
   });
 
+  // ページネーションが何ページあるか計算
+  const range = (start: number, end: number) =>
+    [...Array(end - start + 1)].map((_, i) => start + i);
+  const numArray = range(1, Math.ceil(total / PER_PAGE));
+
   return {
     props: {
       articles: items,
       totalCount: total,
+      pageRange: numArray.length,
     },
   };
 };
