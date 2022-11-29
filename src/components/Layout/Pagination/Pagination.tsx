@@ -9,7 +9,7 @@ type Props = {
 };
 
 const LIST_LIMIT = 8;
-const LIST_OFFSET = 10;
+// const LIST_OFFSET = 10;
 const ONE_PAGE_DISPLAY_USERS = LIST_LIMIT;
 const LAST_DISPLAY_SIZE = LIST_LIMIT;
 const AROUND_DISPLAY_PAGES = Math.floor(LIST_LIMIT / 2);
