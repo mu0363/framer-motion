@@ -17,11 +17,11 @@ const About: NextPage = () => {
         <h1 className="text-6xl font-bold">About</h1>
         <section className="mb-40 flex flex-col space-y-12">
           <ImageItem />
-          <TextItem text="ようこそ、ここからの世界へ。" />
-          <TextItem text="次の文字は" />
-          <TextItem text="動き出し、早くなる。" />
-          <TextItem text="ようこそ、ここからの世界へ。" />
-          <TextItem text="次の文字は" />
+          <TextItem text="すべて人は、人種、皮膚の色、性、言語、宗教、" />
+          <TextItem text="政治上その他の意見、国民的もしくは" />
+          <TextItem text="社会的出身、財産、門地その他の地位又は" />
+          <TextItem text="これに類するいかなる" />
+          <TextItem text="自由による差別をも受けることなく、" />
         </section>
       </MainLayout>
     </>

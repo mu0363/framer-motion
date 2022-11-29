@@ -71,6 +71,7 @@ export const getStaticPaths: GetStaticPaths<{ id: string }> = async () => {
     modelUid: process.env.NEWT_ARTICLE_UID,
   });
   const ids = items.map((item) => `/article/${item._id}`);
+
   return {
     paths: ids,
     fallback: false,

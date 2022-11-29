@@ -43,6 +43,26 @@ const Article: NextPage<
 
 export default Article;
 
+// export const getStaticPaths: GetStaticPaths = async () => {
+//   const LIST_LIMIT = 8;
+//   const { total, items } = await newtClient.getContents<ArticleType>({
+//     appUid: process.env.NEWT_APP_UID,
+//     modelUid: process.env.NEWT_ARTICLE_UID,
+//   });
+//   const ids = items.map((item) => `/article/${item._id}`);
+
+//   const paths = [...Array(Math.ceil(total / LIST_LIMIT))]
+//     .map((_, i) => i)
+//     .map((page) => `/article/${page}`);
+
+//   console.log(paths);
+
+//   return {
+//     paths,
+//     fallback: false,
+//   };
+// };
+
 export const getStaticProps: GetStaticProps<
   Contents<ArticleType>
 > = async () => {
