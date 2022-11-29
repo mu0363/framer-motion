@@ -1,6 +1,7 @@
 import { Pagination } from "@mantine/core";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import { useCallback, useEffect, useState } from "react";
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import type { ArticleType } from "src/types";
 import { PER_PAGE } from "@libs/constant";
@@ -16,14 +17,23 @@ type Props = {
 };
 
 const ArticlePage: NextPage<Props> = ({ articles, totalCount, pageRange }) => {
+  const [currentPage, setCurrentPage] = useState(1);
   const router = useRouter();
-  const handlePaginate = (page: number) => {
-    if (page === 1) {
-      router.push("/article/page/1");
-    } else {
-      router.push(`${page}`);
-    }
-  };
+
+  useEffect(() => {
+    setCurrentPage(Number(router.query.pageId));
+  }, [router]);
+
+  const handlePaginate = useCallback(
+    (page: number) => {
+      if (page === 1) {
+        router.push("/article/page/1");
+      } else {
+        router.push(`${page}`);
+      }
+    },
+    [router]
+  );
 
   return (
     <>
@@ -49,7 +59,9 @@ const ArticlePage: NextPage<Props> = ({ articles, totalCount, pageRange }) => {
             })}
           </div>
           <Pagination
+            initialPage={1}
             total={pageRange}
+            page={currentPage}
             color="cyan"
             radius="md"
             onChange={handlePaginate}
@@ -59,6 +71,10 @@ const ArticlePage: NextPage<Props> = ({ articles, totalCount, pageRange }) => {
     </>
   );
 };
+
+// ページネーションが何ページあるか計算
+const range = (start: number, end: number) =>
+  [...Array(end - start + 1)].map((_, i) => start + i);
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const { total } = await newtClient.getContents<ArticleType>({
@@ -70,12 +86,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
     },
   });
 
-  // ページネーションが何ページあるか計算
-  const range = (start: number, end: number) =>
-    [...Array(end - start + 1)].map((_, i) => start + i);
-  const numArray = range(1, Math.ceil(total / PER_PAGE));
-
   // 全てのパスの配列を作成
+  const numArray = range(1, Math.ceil(total / PER_PAGE));
   const paths = numArray.map((number) => `/article/page/${number}`);
 
   return { paths, fallback: false };
@@ -98,9 +110,6 @@ export const getStaticProps: GetStaticProps<Props> = async (ctx) => {
     },
   });
 
-  // ページネーションが何ページあるか計算
-  const range = (start: number, end: number) =>
-    [...Array(end - start + 1)].map((_, i) => start + i);
   const numArray = range(1, Math.ceil(total / PER_PAGE));
 
   return {
