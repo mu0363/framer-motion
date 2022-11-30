@@ -5,6 +5,7 @@ import { useCallback, useEffect, useState } from "react";
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import type { ArticleType } from "src/types";
 import { PER_PAGE } from "@libs/constant";
+import { pagesRange } from "@libs/function";
 import { TextItem } from "src/components/Common/TextItem";
 import { MainLayout } from "src/components/Layout/MainLayout";
 import { ArticleCard } from "src/components/pages/article/ArticleCard";
@@ -72,9 +73,9 @@ const ArticlePage: NextPage<Props> = ({ articles, totalCount, pageRange }) => {
   );
 };
 
-// ページネーションが何ページあるか計算
-const range = (start: number, end: number) =>
-  [...Array(end - start + 1)].map((_, i) => start + i);
+// // ページネーションが何ページあるか計算
+// const range = (start: number, end: number) =>
+//   [...Array(end - start + 1)].map((_, i) => start + i);
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const { total } = await newtClient.getContents<ArticleType>({
@@ -87,7 +88,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   });
 
   // 全てのパスの配列を作成
-  const numArray = range(1, Math.ceil(total / PER_PAGE));
+  const numArray = pagesRange(1, Math.ceil(total / PER_PAGE));
   const paths = numArray.map((number) => `/article/page/${number}`);
 
   return { paths, fallback: "blocking" };
@@ -110,7 +111,7 @@ export const getStaticProps: GetStaticProps<Props> = async (ctx) => {
     },
   });
 
-  const numArray = range(1, Math.ceil(total / PER_PAGE));
+  const numArray = pagesRange(1, Math.ceil(total / PER_PAGE));
 
   return {
     props: {
