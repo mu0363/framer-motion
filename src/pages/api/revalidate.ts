@@ -7,7 +7,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   try {
-    await res.revalidate("/article");
+    const { _id } = req.body;
+    await res.revalidate(`/article/${_id}`);
     await res.revalidate("/article/page");
     return res.json({ revalidated: true });
   } catch (err) {
