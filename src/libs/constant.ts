@@ -1,8 +1,67 @@
+// import { ArticleType } from "@types";
+
 export const PER_PAGE = 4;
+
+// export const mockData: ArticleType = {
+//   _id: "1",
+//   _sys: {
+//     createdAt: "2022-11-24T00:35:25.184Z",
+//     updatedAt: string,
+//     customOrder: number,
+//     raw: {
+//       createdAt: string,
+//       updatedAt: string,
+//       firstPublishedAt: string,
+//       publishedAt: string,
+//     },
+//   },
+//   title: string,
+//   body: string,
+//   meta: [
+//     {
+//       title: string,
+//       description: string,
+//       ogImage: {
+//         _id: string,
+//         src: string,
+//         fileType: string,
+//         fileSize: number,
+//         fileName: string,
+//         width: number,
+//         height: number,
+//       },
+//     },
+//   ],
+//   coverImage: {
+//     _id: string,
+//     altText: string,
+//     description: string,
+//     src: string,
+//     fileType: string,
+//     fileSize: number,
+//     fileName: string,
+//     width: number,
+//     height: number,
+//     title: string,
+//   },
+//   author: {
+//     _id: Content["_id"],
+//     _sys: Content["_sys"],
+//     fullName: string,
+//     biography: string,
+//   },
+//   categories: [
+//     {
+//       _id: Content["_id"],
+//       _sys: Content["_sys"],
+//       category: string,
+//     },
+//   ],
+// };
 
 export const mock = [
   {
-    _id: "2",
+    _id: "1",
     _sys: {
       raw: {
         createdAt: "2022-11-24T00:35:25.184Z",
