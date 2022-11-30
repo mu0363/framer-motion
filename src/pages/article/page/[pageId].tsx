@@ -90,7 +90,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const numArray = range(1, Math.ceil(total / PER_PAGE));
   const paths = numArray.map((number) => `/article/page/${number}`);
 
-  return { paths, fallback: false };
+  return { paths, fallback: "blocking" };
 };
 
 export const getStaticProps: GetStaticProps<Props> = async (ctx) => {
