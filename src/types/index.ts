@@ -1,39 +1,36 @@
 import type { Content } from "newt-client-js";
 
+type NewtImageType = {
+  _id: string;
+  altText: string;
+  description: string;
+  src: string;
+  fileType: string;
+  fileSize: number;
+  fileName: string;
+  width: number;
+  height: number;
+  metadata: object;
+  title: string;
+};
+
 type Merge<T extends object> = {
   [P in keyof T]: T[P];
 };
+
 export type ArticleType = Merge<
   Content & {
     title: string;
     body: string;
     meta: [
       {
+        _id: string;
         title: string;
         description: string;
-        ogImage: {
-          _id: string;
-          src: string;
-          fileType: string;
-          fileSize: number;
-          fileName: string;
-          width: number;
-          height: number;
-        };
+        ogImage: NewtImageType;
       }
     ];
-    coverImage: {
-      _id: string;
-      altText: string;
-      description: string;
-      src: string;
-      fileType: string;
-      fileSize: number;
-      fileName: string;
-      width: number;
-      height: number;
-      title: string;
-    };
+    coverImage: NewtImageType;
     author: {
       _id: Content["_id"];
       _sys: Content["_sys"];
@@ -45,3 +42,5 @@ export type ArticleType = Merge<
     ];
   }
 >;
+
+export type CategoryType = { _id: string; category: string };

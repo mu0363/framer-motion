@@ -3,7 +3,8 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useCallback, useEffect, useState } from "react";
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
-import type { ArticleType } from "src/types";
+import type { ArticleType, CategoryType } from "src/types";
+import { Badge } from "@components/Badge";
 import { PER_PAGE } from "@libs/constant";
 import { pagesRange } from "@libs/function";
 import { TextItem } from "src/components/Common/TextItem";
@@ -13,11 +14,17 @@ import { newtClient } from "src/libs/newtClient";
 
 type Props = {
   articles: ArticleType[];
+  categories: CategoryType[];
   totalCount: number;
   pageRange: number;
 };
 
-const ArticlePage: NextPage<Props> = ({ articles, totalCount, pageRange }) => {
+const ArticlePage: NextPage<Props> = ({
+  articles,
+  categories,
+  totalCount,
+  pageRange,
+}) => {
   const [currentPage, setCurrentPage] = useState(1);
   const router = useRouter();
 
@@ -49,6 +56,14 @@ const ArticlePage: NextPage<Props> = ({ articles, totalCount, pageRange }) => {
           <div className="h-60 xl:h-64" />
           <TextItem text="Article" />
           <p>{`total: ${totalCount}`}</p>
+          <div className="my-2 flex space-x-2">
+            {categories.map((item) => (
+              <button type="button" key={item._id}>
+                <Badge key={item._id} text={item.category} />
+              </button>
+            ))}
+          </div>
+
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 ">
             {articles.map((item) => {
               const { _id } = item;
@@ -65,6 +80,7 @@ const ArticlePage: NextPage<Props> = ({ articles, totalCount, pageRange }) => {
             page={currentPage}
             color="cyan"
             radius="md"
+            siblings={2}
             onChange={handlePaginate}
           />
         </section>
@@ -111,11 +127,20 @@ export const getStaticProps: GetStaticProps<Props> = async (ctx) => {
     },
   });
 
+  const { items: categories } = await newtClient.getContents<CategoryType>({
+    appUid: process.env.NEWT_APP_UID,
+    modelUid: process.env.NEWT_CATEGORY_UID,
+    query: {
+      select: ["_id", "category"],
+    },
+  });
+
   const numArray = pagesRange(1, Math.ceil(total / PER_PAGE));
 
   return {
     props: {
       articles: items,
+      categories,
       totalCount: total,
       pageRange: numArray.length,
     },

@@ -1,16 +1,22 @@
-import { NextApiRequest, NextApiResponse } from "next";
+import { z } from "zod";
+import type { NextApiRequest, NextApiResponse, NextApiHandler } from "next";
 import { PER_PAGE } from "@libs/constant";
 import { pagesRange } from "@libs/function";
 import { newtClient } from "@libs/newtClient";
 import { ArticleType } from "@types";
 
-const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  if (req.query.secret !== process.env.REVALIDATE_SECRET_TOKEN) {
-    return res.status(401).json({ message: "Invalid token" });
-  }
+const requestData = z.object({
+  query: z.object({ secret: z.literal(process.env.REVALIDATE_SECRET_TOKEN) }),
+  body: z.object({ _id: z.string().min(1) }),
+});
 
+const handler: NextApiHandler = async (
+  req: NextApiRequest,
+  res: NextApiResponse
+) => {
   try {
-    const { _id } = req.body;
+    const parsedRequest = requestData.parse(req);
+    const { _id } = parsedRequest.body;
     const { total } = await newtClient.getContents<ArticleType>({
       appUid: process.env.NEWT_APP_UID,
       modelUid: process.env.NEWT_ARTICLE_UID,
@@ -27,6 +33,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     return res.json({ revalidated: true });
   } catch (err) {
+    if (err instanceof Error) {
+      return res.status(500).send(`${err.message}`);
+    }
     return res.status(500).send("Error revalidating");
   }
 };
