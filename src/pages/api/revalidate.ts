@@ -6,8 +6,8 @@ import { newtClient } from "@libs/newtClient";
 import { ArticleType } from "@types";
 
 const requestData = z.object({
-  query: z.object({ secret: z.literal(process.env.REVALIDATE_SECRET_TOKEN) }),
   body: z.object({ _id: z.string().min(1) }),
+  headers: z.object({ secret: z.literal(process.env.REVALIDATE_SECRET_TOKEN) }),
 });
 
 const handler: NextApiHandler = async (
