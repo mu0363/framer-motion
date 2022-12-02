@@ -1,6 +1,5 @@
 import { format } from "date-fns";
 import Head from "next/head";
-import Image from "next/image";
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import type { ArticleType } from "src/types";
 import { Badge } from "src/components/Badge";
@@ -8,51 +7,38 @@ import { MainLayout } from "src/components/Layout/MainLayout";
 import { newtClient } from "src/libs/newtClient";
 
 const ArticleDetail: NextPage<ArticleType> = ({
-  _sys,
   title,
   body,
   meta,
-  coverImage,
+  publishedAt,
   categories,
   author,
 }) => {
   return (
     <>
       <Head>
-        <title>{meta[0].title}</title>
-        <meta name="description" content={meta[0].description} />
+        <title>{meta.title}</title>
+        <meta name="description" content={meta.description} />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <MainLayout>
-        <section className="mx-auto w-11/12 md:w-4/5 xl:w-1/2">
+        <section className="mx-5">
           <div className="h-10 md:h-36" />
           <div className="md: mb-4 flex flex-col items-start md:flex-row-reverse md:items-center md:justify-end">
             <Badge text={categories[0].category} />
-            <h1 className="mt-2 text-2xl font-bold md:mr-4 md:mt-0 md:text-3xl">
+            <h1 className="mt-2 text-2xl font-bold md:mr-4 md:mt-0 md:text-4xl">
               {title}
             </h1>
           </div>
           <div className="mb-16 flex items-center space-x-2 md:flex">
-            <span className="text-sm">{author.fullName}</span>
-            <span className="text-xs text-gray-500">
-              {format(new Date(_sys.createdAt), "yyyy年MM月dd日")}
+            <span className="text-base">{author.fullName}</span>
+            <span className="text-sm text-gray-500">
+              {format(new Date(publishedAt), "yyyy年MM月dd日")}
             </span>
           </div>
-          <div className="relative mb-2 h-44 w-full overflow-hidden md:h-80 xl:h-96">
-            <Image
-              src={coverImage.src}
-              alt={coverImage.fileName}
-              fill
-              priority
-              sizes="(max-width: 768px) 100vw,
-              (max-width: 1280px) 50vw,
-              33vw"
-              className="object-cover"
-            />
-          </div>
           <div
-            className="prose my-16 md:my-24"
+            className="prose my-16 text-sm md:my-24 lg:text-xl"
             dangerouslySetInnerHTML={{ __html: body }}
           />
           <div className="mb-12 rounded-md border p-5 md:mb-24 md:p-10">

@@ -20,17 +20,14 @@ type Merge<T extends object> = {
 
 export type ArticleType = Merge<
   Content & {
+    publishedAt: string;
+    meta: {
+      title: string;
+      description: string;
+      ogImage: NewtImageType;
+    };
     title: string;
     body: string;
-    meta: [
-      {
-        _id: string;
-        title: string;
-        description: string;
-        ogImage: NewtImageType;
-      }
-    ];
-    coverImage: NewtImageType;
     author: {
       _id: Content["_id"];
       _sys: Content["_sys"];
@@ -42,5 +39,31 @@ export type ArticleType = Merge<
     ];
   }
 >;
+
+// 前回の型
+// export type ArticleType = Merge<
+//   Content & {
+//     title: string;
+//     body: string;
+//     meta: [
+//       {
+//         _id: string;
+//         title: string;
+//         description: string;
+//         ogImage: NewtImageType;
+//       }
+//     ];
+//     coverImage: NewtImageType;
+//     author: {
+//       _id: Content["_id"];
+//       _sys: Content["_sys"];
+//       fullName: string;
+//       biography: string;
+//     };
+//     categories: [
+//       { _id: Content["_id"]; _sys: Content["_sys"]; category: string }
+//     ];
+//   }
+// >;
 
 export type CategoryType = { _id: string; category: string };
