@@ -7,8 +7,6 @@ type Props = Omit<ArticleType, "author" | "body" | "meta">;
 
 /** @package */
 export const ArticleCard: FC<Props> = ({ title, _id }) => {
-  console.log(new Date());
-
   return (
     <div className="transition-colors hover:bg-green-50">
       <Link href={`/article/${_id}`}>
