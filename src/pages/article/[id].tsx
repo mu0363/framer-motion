@@ -1,4 +1,3 @@
-import { format, parseISO } from "date-fns";
 import Head from "next/head";
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import type { ArticleType } from "src/types";
@@ -10,7 +9,7 @@ const ArticleDetail: NextPage<ArticleType> = ({
   title,
   body,
   meta,
-  publishedAt,
+  // publishedAt,
   categories,
   author,
 }) => {
@@ -34,7 +33,8 @@ const ArticleDetail: NextPage<ArticleType> = ({
           <div className="mb-16 flex items-center space-x-2 md:flex">
             <span className="text-base">{author.fullName}</span>
             <span className="text-sm text-gray-500">
-              {format(parseISO(publishedAt), "yyyy年MM月dd日")}
+              {/* {format(new Date(), "yyyy年MM月dd日")} */}
+              2022年1月22日
             </span>
           </div>
           <div
