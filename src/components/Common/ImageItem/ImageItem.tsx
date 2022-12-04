@@ -13,7 +13,7 @@ export const ImageItem: FC = () => {
       initial="hidden"
       animate={control}
       variants={variants}
-      className="text-center text-6xl font-extrabold italic text-green-300"
+      className="text-center text-6xl font-bold italic text-green-300"
     >
       <div className="relative h-96 w-1/3">
         <Image

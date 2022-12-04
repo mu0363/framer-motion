@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import "../styles/globals.css";
 import { MantineProvider } from "@mantine/core";
 import { AppProps } from "next/app";
@@ -14,15 +15,18 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         />
       </Head>
 
-      <MantineProvider
-        withGlobalStyles
-        withNormalizeCSS
-        theme={{
-          colorScheme: "light",
-        }}
-      >
-        <Component {...pageProps} />
-      </MantineProvider>
+      <div className="font-zenMaruGothic">
+        <MantineProvider
+          withGlobalStyles
+          withNormalizeCSS
+          theme={{
+            colorScheme: "light",
+            fontFamily: "Zen Maru Gothic",
+          }}
+        >
+          <Component {...pageProps} />
+        </MantineProvider>
+      </div>
     </>
   );
 };

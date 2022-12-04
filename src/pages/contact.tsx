@@ -1,6 +1,5 @@
 import Head from "next/head";
 import React from "react";
-import { TextItem } from "src/components/Common/TextItem";
 import { MainLayout } from "src/components/Layout/MainLayout";
 import { ContactForm } from "src/components/pages/contact/ContactForm";
 
@@ -15,8 +14,6 @@ const Contact = () => {
 
       <MainLayout>
         <section className="mb-20 flex flex-col space-y-12 md:mb-40">
-          <div className="h-24 md:h-60" />
-          <TextItem text="CONTACT" />
           <ContactForm />
         </section>
       </MainLayout>

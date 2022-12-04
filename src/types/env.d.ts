@@ -6,5 +6,7 @@ declare namespace NodeJS {
     readonly NEWT_SPACE_UID: string;
     readonly NEWT_APP_UID: string;
     readonly NEWT_ARTICLE_UID: string;
+    readonly NEWT_CATEGORY_UID: string;
+    readonly REVALIDATE_SECRET_TOKEN: string;
   }
 }

@@ -28,7 +28,7 @@ export const QuestionAccordion: FC<Props> = ({ contents }) => {
                   <ThemeIcon radius="xl" variant="outline" size="sm">
                     ?
                   </ThemeIcon>
-                  <p className="text-base  text-gray-800 md:text-lg">{label}</p>
+                  <p className="text-gray-800 md:text-lg">{label}</p>
                 </Group>
               </Accordion.Control>
               <Accordion.Panel>
