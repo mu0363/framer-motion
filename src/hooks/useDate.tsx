@@ -1,8 +1,5 @@
-export const useDate = (publishedAt: string) => {
-  const date = new Date(publishedAt);
-  const year = date.getFullYear();
-  const month = date.getMonth();
-  const day = date.getDay();
+import { parseISO, format } from "date-fns";
 
-  return `${year}年${month}月${day}日`;
+export const useDate = (publishedAt: string) => {
+  return format(parseISO(publishedAt), "yyyy年MM月dd日");
 };
