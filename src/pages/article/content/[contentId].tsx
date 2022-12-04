@@ -1,7 +1,7 @@
+import { parseISO, format } from "date-fns";
 import Head from "next/head";
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import type { ArticleType } from "src/types";
-import { useDate } from "@hooks/useDate";
 import { Badge } from "src/components/Badge";
 import { MainLayout } from "src/components/Layout/MainLayout";
 import { newtClient } from "src/libs/newtClient";
@@ -14,8 +14,6 @@ const ArticleDetail: NextPage<ArticleType> = ({
   categories,
   author,
 }) => {
-  const formattedPublishedAt = useDate(publishedAt);
-
   return (
     <>
       <Head>
@@ -36,7 +34,7 @@ const ArticleDetail: NextPage<ArticleType> = ({
           <div className="mb-16 flex items-center space-x-2 md:flex">
             <span className="text-base">{author.fullName}</span>
             <span className="text-sm text-gray-500">
-              {formattedPublishedAt}
+              {format(parseISO(publishedAt), "yyyy年MM月dd日")}
             </span>
           </div>
           <div
