@@ -1,4 +1,4 @@
-import { format } from "date-fns";
+import { parseISO } from "date-fns";
 import Head from "next/head";
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import type { ArticleType } from "src/types";
@@ -15,7 +15,8 @@ const ArticleDetail: NextPage<ArticleType> = ({
   categories,
   author,
 }) => {
-  const formattedPublishedAt = format(new Date(publishedAt), "yyyy.MM.dd");
+  const year = parseISO(publishedAt).getFullYear();
+
   return (
     <>
       <Head>
@@ -35,9 +36,7 @@ const ArticleDetail: NextPage<ArticleType> = ({
           </div>
           <div className="mb-16 flex items-center space-x-2 md:flex">
             <span className="text-base">{author.fullName}</span>
-            <span className="text-sm text-gray-500">
-              {formattedPublishedAt}
-            </span>
+            <span className="text-sm text-gray-500">{year}</span>
           </div>
           <div
             className="prose my-16 text-sm md:my-24 lg:text-xl"
