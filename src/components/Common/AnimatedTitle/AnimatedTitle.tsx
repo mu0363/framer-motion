@@ -3,11 +3,14 @@
 import { useAnimation, motion } from "framer-motion";
 import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
+import type { FC } from "react";
+
+type Props = {
+  text: string;
+};
 
 /** @package */
-export const AnimatedTitle = () => {
-  const text = "Magazine";
-
+export const AnimatedTitle: FC<Props> = ({ text }) => {
   const controls = useAnimation();
 
   const { ref, inView } = useInView({

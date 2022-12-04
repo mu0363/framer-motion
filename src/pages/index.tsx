@@ -29,7 +29,7 @@ const Home: NextPage = () => {
               className="relative h-screen w-screen"
             >
               <Image
-                src="/image-05.jpg"
+                src="/image-05_small.webp"
                 alt="image"
                 fill
                 priority

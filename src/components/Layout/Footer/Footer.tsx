@@ -15,7 +15,7 @@ export const Footer = () => {
         <hr className="h-px border-0 bg-gray-200 dark:bg-gray-700" />
       </div>
 
-      <div className="flex flex-col space-y-2 text-center text-xs text-gray-500 md:flex-row md:space-y-0 md:text-left md:text-sm">
+      <div className="flex flex-col space-y-2 text-center text-xs text-gray-400 md:flex-row md:space-y-0 md:text-left md:text-sm">
         <span className="mr-2">COPYRIGHT (C)2022.</span>
         <span>John Doe CORPORATION</span>
       </div>

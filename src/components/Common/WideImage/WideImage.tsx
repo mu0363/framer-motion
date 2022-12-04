@@ -17,7 +17,7 @@ export const WideImage: FC = () => {
       >
         <div className="relative h-44 w-screen md:h-72 lg:h-[30em]">
           <Image
-            src="/image-05.jpg"
+            src="/image-05_small.webp"
             alt="image"
             fill
             priority

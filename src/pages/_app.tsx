@@ -1,8 +1,8 @@
+/* eslint-disable camelcase */
 import "../styles/globals.css";
 import { MantineProvider } from "@mantine/core";
 import { AppProps } from "next/app";
 import Head from "next/head";
-import { CustomFonts } from "src/components/Layout/CustomFonts";
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
@@ -15,18 +15,18 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         />
       </Head>
 
-      <MantineProvider
-        withGlobalStyles
-        withNormalizeCSS
-        theme={{
-          /** Put your mantine theme override here */
-          colorScheme: "light",
-          fontFamily: "LINESeedJP",
-        }}
-      >
-        <CustomFonts />
-        <Component {...pageProps} />
-      </MantineProvider>
+      <div className="font-zenMaruGothic">
+        <MantineProvider
+          withGlobalStyles
+          withNormalizeCSS
+          theme={{
+            colorScheme: "light",
+            fontFamily: "Zen Maru Gothic",
+          }}
+        >
+          <Component {...pageProps} />
+        </MantineProvider>
+      </div>
     </>
   );
 };
