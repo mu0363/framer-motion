@@ -14,7 +14,7 @@ export const ArticleCard: FC<Props> = ({ title, _id, publishedAt }) => {
         <div className="flex items-center justify-between transition-transform hover:translate-x-2">
           <div className="flex items-center space-x-4 overflow-hidden p-3 lg:space-x-16">
             <span className="text-xs text-gray-400 xl:text-sm">
-              {format(parseISO(publishedAt), "yyyy年MM月dd日")}
+              {format(parseISO(publishedAt), "yyyy.MM.dd")}
             </span>
             <span className="truncate text-xs lg:text-base">{title}</span>
           </div>
