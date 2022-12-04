@@ -10,7 +10,6 @@ const ArticleDetail: NextPage<ArticleType> = ({
   title,
   body,
   meta,
-  // _sys,
   publishedAt,
   categories,
   author,
