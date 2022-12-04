@@ -57,7 +57,7 @@ export const getStaticPaths: GetStaticPaths<{ id: string }> = async () => {
     appUid: process.env.NEWT_APP_UID,
     modelUid: process.env.NEWT_ARTICLE_UID,
   });
-  const ids = items.map((item) => `/article/${item._id}`);
+  const ids = items.map((item) => `/article/content/${item._id}`);
 
   return {
     paths: ids,
@@ -67,7 +67,7 @@ export const getStaticPaths: GetStaticPaths<{ id: string }> = async () => {
 
 export const getStaticProps: GetStaticProps<
   ArticleType,
-  { id: string }
+  { contentId: string }
 > = async (ctx) => {
   if (!ctx.params) {
     return { notFound: true };
@@ -75,7 +75,7 @@ export const getStaticProps: GetStaticProps<
   const data = await newtClient.getContent<ArticleType>({
     appUid: process.env.NEWT_APP_UID,
     modelUid: process.env.NEWT_ARTICLE_UID,
-    contentId: ctx.params.id,
+    contentId: ctx.params.contentId,
   });
 
   return {

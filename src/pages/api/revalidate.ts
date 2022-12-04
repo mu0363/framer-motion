@@ -29,7 +29,7 @@ const handler: NextApiHandler = async (
     const paths = numArray.map((number) => `/article/page/${number}`);
     // eslint-disable-next-line no-return-await
     Promise.all(paths.map(async (path) => await res.revalidate(path)));
-    await res.revalidate(`/article/${_id}`);
+    await res.revalidate(`/article/content/${_id}`);
 
     return res.json({ revalidated: true });
   } catch (err) {

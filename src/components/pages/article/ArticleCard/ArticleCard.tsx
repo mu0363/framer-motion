@@ -9,7 +9,7 @@ type Props = Omit<ArticleType, "author" | "body" | "meta">;
 export const ArticleCard: FC<Props> = ({ title, _id, _sys }) => {
   return (
     <div className="transition-colors hover:bg-green-50">
-      <Link href={`/article/${_id}`}>
+      <Link href={`/article/content/${_id}`}>
         <hr />
         <div className="flex items-center justify-between transition-transform hover:translate-x-2">
           <div className="flex items-center space-x-4 overflow-hidden p-3 lg:space-x-16">
