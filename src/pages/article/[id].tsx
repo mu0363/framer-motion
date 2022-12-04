@@ -10,8 +10,8 @@ const ArticleDetail: NextPage<ArticleType> = ({
   title,
   body,
   meta,
-  _sys,
-  // publishedAt,
+  // _sys,
+  publishedAt,
   categories,
   author,
 }) => {
@@ -35,7 +35,7 @@ const ArticleDetail: NextPage<ArticleType> = ({
           <div className="mb-16 flex items-center space-x-2 md:flex">
             <span className="text-base">{author.fullName}</span>
             <span className="text-sm text-gray-500">
-              {format(new Date(_sys.createdAt), "yyyy.MM.dd")}
+              {format(new Date(publishedAt), "yyyy.MM.dd")}
             </span>
           </div>
           <div
