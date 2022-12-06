@@ -27,14 +27,12 @@ export const ContactForm: FC<Props> = ({ formUID }) => {
             label="お名前"
             id="name"
             placeholder="山田太郎"
-            isRequired
             register={register("name")}
             errorMessage={errors.name?.message}
           />
           <TextField
             label="メールアドレス"
             id="email"
-            isRequired
             placeholder="email@example.com"
             register={register("email")}
             errorMessage={errors.email?.message}
@@ -45,7 +43,6 @@ export const ContactForm: FC<Props> = ({ formUID }) => {
           <TextArea
             label="お問い合わせ内容"
             id="content"
-            isRequired={false}
             register={register("content")}
             errorMessage={errors.content?.message}
           />

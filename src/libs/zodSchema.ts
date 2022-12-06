@@ -14,7 +14,7 @@ export const contactSchema = z.object({
   content: z
     .string()
     .min(1, { message: "必須項目です。" })
-    .max(300, { message: "300文字以内にしてください。" }),
+    .max(300, { message: "300文字で入力してください。" }),
 });
 
 export type ContactSchemaType = z.infer<typeof contactSchema>;
@@ -24,9 +24,16 @@ export const eventSchema = z.object({
   email: z
     .string()
     .email({ message: "無効なアドレスです。" })
-    .min(1, { message: "必須項目です。" }),
-  address: z.string().min(1, { message: "必須項目です。" }),
-  phone: z.string().min(10, { message: "必須項目です。" }),
+    .min(1, { message: "必須項目です。" })
+    .max(100, { message: "100文字以内で入力してください。" }),
+  address: z
+    .string()
+    .min(1, { message: "必須項目です。" })
+    .max(100, { message: "100文字以内で入力してください。" }),
+  phone: z
+    .string()
+    .min(10, { message: "10文字以上で入力してください。" })
+    .max(11, { message: "11文字以内で入力してください。" }),
   guest: z.union([
     z.literal("本人会員"),
     z.literal("家族会員"),
@@ -41,10 +48,7 @@ export const eventSchema = z.object({
     z.literal("4人"),
     z.literal("5人"),
   ]),
-  content: z
-    .string()
-    .min(1, { message: "必須項目です。" })
-    .max(300, { message: "300文字以内にしてください。" }),
+  content: z.string().max(300, { message: "300文字で入力してください。" }),
 });
 
 export type EventSchemaType = z.infer<typeof eventSchema>;
