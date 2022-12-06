@@ -3,6 +3,7 @@ import "../styles/globals.css";
 import { MantineProvider } from "@mantine/core";
 import { AppProps } from "next/app";
 import Head from "next/head";
+import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
@@ -15,18 +16,23 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         />
       </Head>
 
-      <div className="font-zenMaruGothic">
-        <MantineProvider
-          withGlobalStyles
-          withNormalizeCSS
-          theme={{
-            colorScheme: "light",
-            fontFamily: "Zen Maru Gothic",
-          }}
-        >
-          <Component {...pageProps} />
-        </MantineProvider>
-      </div>
+      <GoogleReCaptchaProvider
+        reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_CLIENT_KEY}
+        language="ja"
+      >
+        <div className="font-zenMaruGothic">
+          <MantineProvider
+            withGlobalStyles
+            withNormalizeCSS
+            theme={{
+              colorScheme: "light",
+              fontFamily: "Zen Maru Gothic",
+            }}
+          >
+            <Component {...pageProps} />
+          </MantineProvider>
+        </div>
+      </GoogleReCaptchaProvider>
     </>
   );
 };

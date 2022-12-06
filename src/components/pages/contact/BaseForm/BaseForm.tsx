@@ -4,29 +4,34 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Notification } from "@mantine/core";
 import { IconX } from "@tabler/icons";
 import axios from "axios";
-import { useState } from "react";
+import { cloneElement, useState } from "react";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import { useForm, SubmitHandler } from "react-hook-form";
-import type { FC } from "react";
-import { contactSchema, ContactSchemaType } from "@libs/zodSchema";
+import { z } from "zod";
+import type { FC, ReactElement } from "react";
+import { contactSchema } from "@libs/zodSchema";
 import { PrimaryButton } from "src/components/Common/PrimaryButton";
-import { RadioInput } from "src/components/Common/RadioInput";
-import { TextArea } from "src/components/Common/TextArea";
-import { TextField } from "src/components/Common/TextField";
 
-type Props = { formUID: string };
+type Inputs = z.infer<typeof contactSchema>;
+
+type Props = { children: ReactElement; formUID: string };
 
 /** @package */
-export const ContactForm: FC<Props> = ({ formUID }) => {
+export const BaseForm: FC<Props> = ({ children, formUID }) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<ContactSchemaType>({ resolver: zodResolver(contactSchema) });
+  } = useForm<Inputs>({ resolver: zodResolver(contactSchema) });
   const [isBot, setIsBot] = useState(false);
   const { executeRecaptcha } = useGoogleReCaptcha();
 
-  const onSubmit: SubmitHandler<ContactSchemaType> = async (data) => {
+  const childrenWithProps = cloneElement(children, {
+    register,
+    errors,
+  });
+
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
     try {
       if (!executeRecaptcha) {
         return;
@@ -72,29 +77,7 @@ export const ContactForm: FC<Props> = ({ formUID }) => {
         onSubmit={handleSubmit(onSubmit)}
         method="post"
       >
-        <TextField
-          label="お名前"
-          id="name"
-          placeholder="山田太郎"
-          register={register("name")}
-          errorMessage={errors.name?.message}
-        />
-        <TextField
-          label="メールアドレス"
-          id="email"
-          placeholder="email@example.com"
-          register={register("email")}
-          errorMessage={errors.email?.message}
-        />
-
-        <RadioInput register={register("person")} />
-
-        <TextArea
-          label="お問い合わせ内容"
-          id="content"
-          register={register("content")}
-          errorMessage={errors.content?.message}
-        />
+        {childrenWithProps}
 
         <PrimaryButton title="送信" />
       </form>

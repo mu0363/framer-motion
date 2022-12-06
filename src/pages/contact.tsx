@@ -1,7 +1,7 @@
 import Head from "next/head";
 import React from "react";
+import { ContactForm } from "@components/pages/contact/ContactForm";
 import { MainLayout } from "src/components/Layout/MainLayout";
-import { ContactForm } from "src/components/pages/contact/ContactForm";
 
 const Contact = () => {
   return (
@@ -14,7 +14,7 @@ const Contact = () => {
 
       <MainLayout>
         <section className="mb-20 flex flex-col space-y-12 md:mb-40">
-          <ContactForm />
+          <ContactForm formUID={process.env.NEXT_PUBLIC_CONTACT_FORM_UID} />
         </section>
       </MainLayout>
     </>
