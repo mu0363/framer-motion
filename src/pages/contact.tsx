@@ -1,6 +1,6 @@
 import Head from "next/head";
 import React from "react";
-import { ContactForm } from "@components/pages/contact/ContactForm";
+import { ContactForm } from "@components/pages/form/ContactForm";
 import { MainLayout } from "src/components/Layout/MainLayout";
 
 const Contact = () => {
