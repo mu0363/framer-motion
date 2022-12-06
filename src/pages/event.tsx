@@ -1,9 +1,9 @@
 import Head from "next/head";
 import React from "react";
-import { ContactForm } from "@components/pages/form/ContactForm";
+import { EventForm } from "@components/pages/form/EventForm";
 import { MainLayout } from "src/components/Layout/MainLayout";
 
-const Contact = () => {
+const Event = () => {
   return (
     <>
       <Head>
@@ -14,11 +14,11 @@ const Contact = () => {
 
       <MainLayout>
         <section className="mb-20 md:mb-40">
-          <ContactForm formUID={process.env.NEXT_PUBLIC_CONTACT_FORM_UID} />
+          <EventForm formUID={process.env.NEXT_PUBLIC_EVENT_FORM_UID} />
         </section>
       </MainLayout>
     </>
   );
 };
 
-export default Contact;
+export default Event;

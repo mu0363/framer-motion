@@ -14,7 +14,12 @@ export const Header: FC = () => {
         <MenuItem title="QUESTION" width={83} />
         <MenuItem title="ABOUT" width={57} />
         <MenuItem title="ARTICLE/PAGE/1" width={48} />
-        <MenuItem title="LINK" width={36} />
+        <Link
+          href="/event"
+          className="rounded-full bg-green-600 px-4 py-2 text-white hover:bg-green-500"
+        >
+          イベント案内
+        </Link>
         <Link
           href="/contact"
           className="rounded-full bg-green-600 px-4 py-2 text-white hover:bg-green-500"

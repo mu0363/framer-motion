@@ -4,25 +4,29 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import { useState } from "react";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
-import { useForm, SubmitHandler } from "react-hook-form";
-import { ZodType } from "zod";
-import { ContactSchemaType } from "@libs/zodSchema";
+import { useForm, SubmitHandler, FieldValues } from "react-hook-form";
+import { ZodSchema } from "zod";
 
 type Props = {
-  contactSchema: ZodType;
+  schema: ZodSchema;
   formUID: string;
 };
 
-export const useFormOnSubmit = ({ contactSchema, formUID }: Props) => {
+export const useFormOnSubmit = <T extends FieldValues>({
+  schema,
+  formUID,
+}: Props) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<ContactSchemaType>({ resolver: zodResolver(contactSchema) });
+  } = useForm<T>({
+    resolver: zodResolver(schema),
+  });
   const [isBot, setIsBot] = useState(false);
   const { executeRecaptcha } = useGoogleReCaptcha();
 
-  const onSubmit: SubmitHandler<ContactSchemaType> = async (data) => {
+  const onSubmit: SubmitHandler<T> = async (data) => {
     try {
       if (!executeRecaptcha) {
         return;

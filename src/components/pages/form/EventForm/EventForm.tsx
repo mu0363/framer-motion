@@ -2,8 +2,9 @@ import type { FC } from "react";
 import { BotNotification } from "@components/Common/BotNotification/BotNotification";
 import { PrimaryButton } from "@components/Common/PrimaryButton";
 import { useFormOnSubmit } from "@hooks/useFormOnSubmit";
-import { personTypes } from "@libs/constant";
-import { contactSchema, ContactSchemaType } from "@libs/zodSchema";
+import { guestTypes, numberOfGuestTypes } from "@libs/constant";
+
+import { eventSchema, EventSchemaType } from "@libs/zodSchema";
 import { RadioInput } from "src/components/Common/RadioInput";
 import { TextArea } from "src/components/Common/TextArea";
 import { TextField } from "src/components/Common/TextField";
@@ -11,12 +12,12 @@ import { TextField } from "src/components/Common/TextField";
 type Props = { formUID: string };
 
 /** @package */
-export const ContactForm: FC<Props> = ({ formUID }) => {
+export const EventForm: FC<Props> = ({ formUID }) => {
   const { errors, register, onSubmit, handleSubmit, isBot, setIsBot } =
-    useFormOnSubmit<ContactSchemaType>({ schema: contactSchema, formUID });
+    useFormOnSubmit<EventSchemaType>({ schema: eventSchema, formUID });
 
   return (
-    <>
+    <div>
       <form
         className="mt-8 w-full space-y-6 px-5 md:mx-auto xl:w-1/2"
         onSubmit={handleSubmit(onSubmit)}
@@ -34,16 +35,36 @@ export const ContactForm: FC<Props> = ({ formUID }) => {
           <TextField
             label="メールアドレス"
             id="email"
-            isRequired
             placeholder="email@example.com"
+            isRequired
             register={register("email")}
             errorMessage={errors.email?.message}
           />
+          <TextField
+            label="住所"
+            id="address"
+            placeholder="東京都○○区"
+            isRequired
+            register={register("address")}
+            errorMessage={errors.address?.message}
+          />
+          <TextField
+            label="電話番号"
+            id="phone"
+            placeholder="08012345678"
+            isRequired
+            register={register("phone")}
+            errorMessage={errors.phone?.message}
+          />
 
-          <RadioInput register={register("person")} types={personTypes} />
+          <RadioInput register={register("guest")} types={guestTypes} />
+          <RadioInput
+            register={register("numberOfGuest")}
+            types={numberOfGuestTypes}
+          />
 
           <TextArea
-            label="お問い合わせ内容"
+            label="連絡事項・コメントなど"
             id="content"
             isRequired={false}
             register={register("content")}
@@ -53,6 +74,6 @@ export const ContactForm: FC<Props> = ({ formUID }) => {
         <PrimaryButton title="送信" />
       </form>
       <BotNotification isBot={isBot} setIsBot={setIsBot} />
-    </>
+    </div>
   );
 };

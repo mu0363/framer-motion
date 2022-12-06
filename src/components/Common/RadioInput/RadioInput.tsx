@@ -1,32 +1,31 @@
 import { UseFormRegisterReturn } from "react-hook-form";
 import type { FC } from "react";
-
-const personTypes = [
-  { id: "患者本人", title: "患者本人" },
-  { id: "家族", title: "家族" },
-  { id: "その他", title: "その他" },
-];
+import { RadioInputType } from "@types";
 
 type Props = {
   register: UseFormRegisterReturn;
+  types: RadioInputType[];
 };
 
 /** @package */
-export const RadioInput: FC<Props> = ({ register }) => {
+export const RadioInput: FC<Props> = ({ register, types }) => {
   return (
     <div className="flex items-center space-x-3">
-      {personTypes.map((personType) => (
-        <div key={personType.id} className="flex items-center">
+      {types.map((type) => (
+        <div key={type.id} className="flex items-center">
           <input
-            id={personType.id}
+            id={type.id.toString()}
             type="radio"
-            value={personType.title}
-            defaultChecked={personType.id === "患者本人"}
+            value={type.title}
+            defaultChecked={type.id === 1}
             className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
             {...register}
           />
-          <label htmlFor={personType.id} className="ml-2 text-sm font-bold">
-            {personType.title}
+          <label
+            htmlFor={type.id.toString()}
+            className="ml-2 text-sm font-bold"
+          >
+            {type.title}
           </label>
         </div>
       ))}
