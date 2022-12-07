@@ -2,8 +2,8 @@ import type { FC } from "react";
 import { BotNotification } from "@components/Common/BotNotification/BotNotification";
 import { PrimaryButton } from "@components/Common/PrimaryButton";
 import { useFormOnSubmit } from "@hooks/useFormOnSubmit";
-import { guestTypes, numberOfGuestTypes } from "@libs/constant";
-import { EventSchema, EventSchemaType } from "@libs/zodSchema";
+import { personTypes } from "@libs/constant";
+import { MembershipSchema, MembershipSchemaType } from "@libs/zodSchema";
 import { RadioInput } from "src/components/Common/RadioInput";
 import { TextArea } from "src/components/Common/TextArea";
 import { TextField } from "src/components/Common/TextField";
@@ -11,9 +11,12 @@ import { TextField } from "src/components/Common/TextField";
 type Props = { formUID: string };
 
 /** @package */
-export const EventForm: FC<Props> = ({ formUID }) => {
+export const MembershipForm: FC<Props> = ({ formUID }) => {
   const { errors, register, onSubmit, handleSubmit, isBot, setIsBot } =
-    useFormOnSubmit<EventSchemaType>({ schema: EventSchema, formUID });
+    useFormOnSubmit<MembershipSchemaType>({
+      schema: MembershipSchema,
+      formUID,
+    });
 
   return (
     <div>
@@ -62,12 +65,7 @@ export const EventForm: FC<Props> = ({ formUID }) => {
             maxLength={11}
             type="tel"
           />
-
-          <RadioInput register={register("guest")} types={guestTypes} />
-          <RadioInput
-            register={register("numberOfGuest")}
-            types={numberOfGuestTypes}
-          />
+          <RadioInput register={register("person")} types={personTypes} />
 
           <TextArea
             label="連絡事項・コメントなど"

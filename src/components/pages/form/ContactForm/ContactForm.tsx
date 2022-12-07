@@ -3,7 +3,7 @@ import { BotNotification } from "@components/Common/BotNotification/BotNotificat
 import { PrimaryButton } from "@components/Common/PrimaryButton";
 import { useFormOnSubmit } from "@hooks/useFormOnSubmit";
 import { personTypes } from "@libs/constant";
-import { contactSchema, ContactSchemaType } from "@libs/zodSchema";
+import { ContactSchema, ContactSchemaType } from "@libs/zodSchema";
 import { RadioInput } from "src/components/Common/RadioInput";
 import { TextArea } from "src/components/Common/TextArea";
 import { TextField } from "src/components/Common/TextField";
@@ -13,14 +13,13 @@ type Props = { formUID: string };
 /** @package */
 export const ContactForm: FC<Props> = ({ formUID }) => {
   const { errors, register, onSubmit, handleSubmit, isBot, setIsBot } =
-    useFormOnSubmit<ContactSchemaType>({ schema: contactSchema, formUID });
+    useFormOnSubmit<ContactSchemaType>({ schema: ContactSchema, formUID });
 
   return (
     <>
       <form
         className="mt-8 w-full space-y-6 px-5 md:mx-auto xl:w-1/2"
         onSubmit={handleSubmit(onSubmit)}
-        method="post"
       >
         <div className="flex flex-col space-y-6">
           <TextField
@@ -29,6 +28,9 @@ export const ContactForm: FC<Props> = ({ formUID }) => {
             placeholder="山田太郎"
             register={register("name")}
             errorMessage={errors.name?.message}
+            isRequired
+            maxLength={100}
+            type="text"
           />
           <TextField
             label="メールアドレス"
@@ -36,6 +38,9 @@ export const ContactForm: FC<Props> = ({ formUID }) => {
             placeholder="email@example.com"
             register={register("email")}
             errorMessage={errors.email?.message}
+            isRequired
+            maxLength={100}
+            type="email"
           />
 
           <RadioInput register={register("person")} types={personTypes} />
@@ -45,6 +50,7 @@ export const ContactForm: FC<Props> = ({ formUID }) => {
             id="content"
             register={register("content")}
             errorMessage={errors.content?.message}
+            isRequired
           />
         </div>
         <PrimaryButton title="送信" />

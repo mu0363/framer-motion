@@ -20,6 +20,7 @@ export const useFormOnSubmit = <T extends FieldValues>({
     register,
     handleSubmit,
     formState: { errors },
+    control,
   } = useForm<T>({
     resolver: zodResolver(schema),
   });
@@ -70,6 +71,7 @@ export const useFormOnSubmit = <T extends FieldValues>({
     errors,
     handleSubmit,
     onSubmit,
+    control,
     isBot,
     setIsBot,
   };

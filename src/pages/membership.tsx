@@ -1,6 +1,6 @@
 import Head from "next/head";
 import React from "react";
-import { EventForm } from "@components/pages/form/EventForm";
+import { MembershipForm } from "@components/pages/form/MembershipForm";
 import { MainLayout } from "src/components/Layout/MainLayout";
 
 const Membership = () => {
@@ -14,7 +14,9 @@ const Membership = () => {
 
       <MainLayout>
         <section className="mb-20 md:mb-40">
-          <EventForm formUID={process.env.NEXT_PUBLIC_EVENT_FORM_UID} />
+          <MembershipForm
+            formUID={process.env.NEXT_PUBLIC_MEMBERSHIP_FORM_UID}
+          />
         </section>
       </MainLayout>
     </>

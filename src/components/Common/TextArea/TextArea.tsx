@@ -7,6 +7,7 @@ type Props = {
   id: string;
   register: UseFormRegisterReturn;
   errorMessage?: string;
+  isRequired: boolean;
 };
 
 /** @package */
@@ -15,10 +16,15 @@ export const TextArea: FC<Props> = ({
   id,
   register,
   errorMessage = "",
+  isRequired,
 }) => {
   return (
     <label htmlFor={id}>
-      <LabelAndError label={label} errorMessage={errorMessage} />
+      <LabelAndError
+        label={label}
+        errorMessage={errorMessage}
+        isRequired={isRequired}
+      />
       <div className="mt-1">
         <textarea
           id={id}
