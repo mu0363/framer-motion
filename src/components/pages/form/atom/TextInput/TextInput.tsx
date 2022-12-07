@@ -14,7 +14,7 @@ type Props = {
 };
 
 /** @package */
-export const TextField: FC<Props> = ({
+export const TextInput: FC<Props> = ({
   label,
   id,
   placeholder,

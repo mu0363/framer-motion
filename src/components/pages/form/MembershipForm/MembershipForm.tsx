@@ -1,12 +1,13 @@
+import { PrimaryButton } from "../atom/PrimaryButton";
+import { RadioInput } from "../atom/RadioInput";
+import { TextArea } from "../atom/TextArea";
+import { TextInput } from "../atom/TextInput";
+import { ZipcodeFiled } from "../atom/ZipcodeFiled/ZipcodeFiled";
 import type { FC } from "react";
 import { BotNotification } from "@components/Common/BotNotification/BotNotification";
-import { PrimaryButton } from "@components/Common/PrimaryButton";
 import { useFormOnSubmit } from "@hooks/useFormOnSubmit";
 import { personTypes } from "@libs/constant";
 import { MembershipSchema, MembershipSchemaType } from "@libs/zodSchema";
-import { RadioInput } from "src/components/Common/RadioInput";
-import { TextArea } from "src/components/Common/TextArea";
-import { TextField } from "src/components/Common/TextField";
 
 type Props = { formUID: string };
 
@@ -25,7 +26,7 @@ export const MembershipForm: FC<Props> = ({ formUID }) => {
         onSubmit={handleSubmit(onSubmit)}
       >
         <div className="flex flex-col space-y-6">
-          <TextField
+          <TextInput
             label="お名前"
             id="name"
             placeholder="山田太郎"
@@ -35,7 +36,7 @@ export const MembershipForm: FC<Props> = ({ formUID }) => {
             maxLength={100}
             type="text"
           />
-          <TextField
+          <TextInput
             label="メールアドレス"
             id="email"
             placeholder="email@example.com"
@@ -45,7 +46,11 @@ export const MembershipForm: FC<Props> = ({ formUID }) => {
             maxLength={100}
             type="email"
           />
-          <TextField
+          <ZipcodeFiled
+            registerMain={register("zipcodeMain")}
+            registerSub={register("zipcodeSub")}
+          />
+          <TextInput
             label="住所"
             id="address"
             placeholder="東京都○○区"
@@ -55,7 +60,7 @@ export const MembershipForm: FC<Props> = ({ formUID }) => {
             maxLength={100}
             type="text"
           />
-          <TextField
+          <TextInput
             label="電話番号"
             id="phone"
             placeholder="08012345678"

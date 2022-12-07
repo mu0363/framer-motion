@@ -15,6 +15,16 @@ const NameEmailSchema = z.object({
 
 // 住所と電話番号の共通スキーマ
 const AddressPhoneSchema = z.object({
+  zipcodeMain: z
+    .string()
+    .regex(/^[0-9]*$/, { message: "半角数字で入力してください。" })
+    .min(3)
+    .max(3),
+  zipcodeSub: z
+    .string()
+    .regex(/^[0-9]*$/, { message: "半角数字で入力してください。" })
+    .min(4)
+    .max(4),
   address: z
     .string()
     .min(1, { message: "必須項目です。" })
