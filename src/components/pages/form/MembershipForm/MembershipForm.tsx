@@ -1,9 +1,10 @@
+import { FC } from "react";
 import { AddressFiled } from "../atom/AddressFiled";
+import { BDDatePicker } from "../atom/BDDatePicker";
 import { PrimaryButton } from "../atom/PrimaryButton";
 import { RadioInput } from "../atom/RadioInput";
 import { TextArea } from "../atom/TextArea";
 import { TextInput } from "../atom/TextInput";
-import type { FC } from "react";
 import { InvalidNotification } from "@components/Common/InvalidNotification";
 import { useFormOnSubmit } from "@hooks/useFormOnSubmit";
 import { personTypes } from "@libs/constant";
@@ -19,6 +20,7 @@ export const MembershipForm: FC<Props> = ({ formUID }) => {
     onSubmit,
     handleSubmit,
     setValue,
+    control,
     isBot,
     setIsBot,
   } = useFormOnSubmit<MembershipSchemaType>({
@@ -70,8 +72,13 @@ export const MembershipForm: FC<Props> = ({ formUID }) => {
             maxLength={11}
             type="tel"
           />
+          <BDDatePicker
+            label="生年月日"
+            errorMessage={errors.birthday?.message}
+            isRequired
+            control={control}
+          />
           <RadioInput register={register("person")} types={personTypes} />
-
           <TextArea
             label="連絡事項・コメントなど"
             id="content"

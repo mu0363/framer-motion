@@ -1,7 +1,6 @@
 // FIXME: console.log削除
 /* eslint-disable no-console */
 import { zodResolver } from "@hookform/resolvers/zod";
-import axios from "axios";
 import { useState } from "react";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import { useForm, SubmitHandler, FieldValues } from "react-hook-form";
@@ -50,15 +49,18 @@ export const useFormOnSubmit = <T extends FieldValues>({
 
       if (res.status === 200) {
         // botでなければnewtに問い合わせ内容を送信
-        axios.post(
-          `https://${process.env.NEXT_PUBLIC_SPACE_UID}.form.newt.so/v1/${formUID}`,
-          data,
-          {
-            headers: {
-              Accept: "application/json",
-            },
-          }
-        );
+        console.log(formUID);
+        console.log(data);
+
+        // axios.post(
+        //   `https://${process.env.NEXT_PUBLIC_SPACE_UID}.form.newt.so/v1/${formUID}`,
+        //   data,
+        //   {
+        //     headers: {
+        //       Accept: "application/json",
+        //     },
+        //   }
+        // );
       } else {
         setIsBot(true);
       }

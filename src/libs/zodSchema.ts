@@ -97,6 +97,10 @@ export type EventSchemaType = z.infer<typeof EventSchema>;
  */
 export const MembershipSchema = z
   .object({
+    birthday: z.date({
+      required_error: "必須項目です。",
+      invalid_type_error: "無効な値です。",
+    }),
     person: z.union([
       z.literal("患者本人"),
       z.literal("家族"),
