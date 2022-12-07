@@ -71,7 +71,7 @@ export const AddressFiled: FC<Props> = ({
     <div>
       <div className="mb-2 flex items-center space-x-4">
         <div className="flex items-center space-x-1">
-          <span className="text-sm font-bold md:text-lg">郵便番号</span>
+          <span className="text-sm font-bold md:text-base">郵便番号</span>
           <span className="text-xl text-red-700">*</span>
         </div>
       </div>

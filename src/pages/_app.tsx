@@ -20,13 +20,15 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_CLIENT_KEY}
         language="ja"
       >
-        <div className="font-zenMaruGothic">
+        {/* <div className="font-zenMaruGothic"> */}
+        <div>
           <MantineProvider
             withGlobalStyles
             withNormalizeCSS
             theme={{
               colorScheme: "light",
-              fontFamily: "Zen Maru Gothic",
+
+              // fontFamily: "Zen Maru Gothic",
             }}
           >
             <Component {...pageProps} />

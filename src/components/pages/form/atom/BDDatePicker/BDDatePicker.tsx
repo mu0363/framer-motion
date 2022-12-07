@@ -21,7 +21,7 @@ export const BDDatePicker: FC<Props> = ({
   isRequired,
 }) => {
   return (
-    <>
+    <div>
       <LabelAndError
         label={label}
         errorMessage={errorMessage}
@@ -33,19 +33,16 @@ export const BDDatePicker: FC<Props> = ({
         render={({ field: { onChange, value } }) => (
           <DatePicker
             locale="ja"
-            withAsterisk
             placeholder="生年月日を選択してください"
             inputFormat="YYYY年MM月DD日"
             onChange={onChange}
             value={value}
             icon={<IconCalendar size={16} />}
-            style={{
-              fontSize: 26,
-              marginTop: 24,
-            }}
+            dropdownType="modal"
+            firstDayOfWeek="sunday"
           />
         )}
       />
-    </>
+    </div>
   );
 };

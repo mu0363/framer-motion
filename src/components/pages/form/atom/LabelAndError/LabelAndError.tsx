@@ -13,9 +13,9 @@ export const LabelAndError: FC<Props> = ({
   isRequired,
 }) => {
   return (
-    <div className="mb-2 flex items-center space-x-4">
+    <div className="mb-2 flex items-center">
       <div className="flex items-center space-x-1">
-        <span className="text-sm font-bold md:text-lg">{label}</span>
+        <span className="text-sm font-bold md:text-base">{label}</span>
         {isRequired && <span className="text-xl text-red-700">*</span>}
       </div>
       {errorMessage && (
