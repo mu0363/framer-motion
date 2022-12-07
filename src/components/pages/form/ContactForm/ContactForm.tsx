@@ -18,7 +18,7 @@ export const ContactForm: FC<Props> = ({ formUID }) => {
   return (
     <>
       <form
-        className="mt-8 w-full space-y-6 px-5 md:mx-auto xl:w-1/2"
+        className="mt-8 w-full px-5 md:mx-auto xl:w-1/2"
         onSubmit={handleSubmit(onSubmit)}
       >
         <div className="flex flex-col space-y-6">
@@ -52,8 +52,8 @@ export const ContactForm: FC<Props> = ({ formUID }) => {
             errorMessage={errors.content?.message}
             isRequired
           />
+          <PrimaryButton title="送信" />
         </div>
-        <PrimaryButton title="送信" />
       </form>
       <BotNotification isBot={isBot} setIsBot={setIsBot} />
     </>
