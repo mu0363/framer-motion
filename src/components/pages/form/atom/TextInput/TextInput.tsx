@@ -11,6 +11,7 @@ type Props = {
   isRequired: boolean;
   maxLength: number;
   type: "tel" | "text" | "email";
+  value?: string;
 };
 
 /** @package */
@@ -37,6 +38,7 @@ export const TextInput: FC<Props> = ({
         placeholder={placeholder}
         maxLength={maxLength}
         type={type}
+        autoComplete={id}
         {...register}
       />
     </label>

@@ -1,23 +1,28 @@
 import { Notification } from "@mantine/core";
 import { IconX } from "@tabler/icons";
-import type { FC } from "react";
+import type { FC, ReactNode } from "react";
 
 type Props = {
-  isBot: boolean;
-  setIsBot: (isBot: boolean) => void;
+  isInvalid: boolean;
+  setIsInvalid: (isBot: boolean) => void;
+  children: ReactNode;
 };
 
-export const BotNotification: FC<Props> = ({ isBot, setIsBot }) => {
+export const InvalidNotification: FC<Props> = ({
+  isInvalid,
+  setIsInvalid,
+  children,
+}) => {
   return (
     <div>
-      {isBot && (
+      {isInvalid && (
         <div className="mt-10">
           <Notification
             icon={<IconX size={18} />}
             color="red"
-            onClose={() => setIsBot(false)}
+            onClose={() => setIsInvalid(false)}
           >
-            操作は無効です。
+            {children}
           </Notification>
         </div>
       )}

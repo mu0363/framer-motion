@@ -3,7 +3,7 @@ import { RadioInput } from "../atom/RadioInput";
 import { TextArea } from "../atom/TextArea";
 import { TextInput } from "../atom/TextInput";
 import type { FC } from "react";
-import { BotNotification } from "@components/Common/BotNotification/BotNotification";
+import { InvalidNotification } from "@components/Common/InvalidNotification";
 import { useFormOnSubmit } from "@hooks/useFormOnSubmit";
 import { guestTypes, numberOfGuestTypes } from "@libs/constant";
 import { EventSchema, EventSchemaType } from "@libs/zodSchema";
@@ -79,7 +79,9 @@ export const EventForm: FC<Props> = ({ formUID }) => {
           <PrimaryButton title="送信" />
         </div>
       </form>
-      <BotNotification isBot={isBot} setIsBot={setIsBot} />
+      <InvalidNotification isInvalid={isBot} setIsInvalid={setIsBot}>
+        操作は無効です
+      </InvalidNotification>
     </div>
   );
 };

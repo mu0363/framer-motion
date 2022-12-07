@@ -2,9 +2,9 @@ import { PrimaryButton } from "../atom/PrimaryButton";
 import { RadioInput } from "../atom/RadioInput";
 import { TextArea } from "../atom/TextArea";
 import { TextInput } from "../atom/TextInput";
-import { ZipcodeFiled } from "../atom/ZipcodeFiled/ZipcodeFiled";
+import { ZipcodeFiled } from "../atom/ZipcodeFiled";
 import type { FC } from "react";
-import { BotNotification } from "@components/Common/BotNotification/BotNotification";
+import { InvalidNotification } from "@components/Common/InvalidNotification";
 import { useFormOnSubmit } from "@hooks/useFormOnSubmit";
 import { personTypes } from "@libs/constant";
 import { MembershipSchema, MembershipSchemaType } from "@libs/zodSchema";
@@ -13,11 +13,18 @@ type Props = { formUID: string };
 
 /** @package */
 export const MembershipForm: FC<Props> = ({ formUID }) => {
-  const { errors, register, onSubmit, handleSubmit, isBot, setIsBot } =
-    useFormOnSubmit<MembershipSchemaType>({
-      schema: MembershipSchema,
-      formUID,
-    });
+  const {
+    errors,
+    register,
+    onSubmit,
+    handleSubmit,
+    setValue,
+    isBot,
+    setIsBot,
+  } = useFormOnSubmit<MembershipSchemaType>({
+    schema: MembershipSchema,
+    formUID,
+  });
 
   return (
     <div>
@@ -47,18 +54,11 @@ export const MembershipForm: FC<Props> = ({ formUID }) => {
             type="email"
           />
           <ZipcodeFiled
-            registerMain={register("zipcodeMain")}
-            registerSub={register("zipcodeSub")}
-          />
-          <TextInput
-            label="住所"
-            id="address"
-            placeholder="東京都○○区"
-            register={register("address")}
+            registerZipMain={register("zipcodeMain")}
+            registerZipSub={register("zipcodeSub")}
+            registerAddress={register("address")}
+            setValue={setValue}
             errorMessage={errors.address?.message}
-            isRequired
-            maxLength={100}
-            type="text"
           />
           <TextInput
             label="電話番号"
@@ -82,7 +82,9 @@ export const MembershipForm: FC<Props> = ({ formUID }) => {
           <PrimaryButton title="送信" />
         </div>
       </form>
-      <BotNotification isBot={isBot} setIsBot={setIsBot} />
+      <InvalidNotification isInvalid={isBot} setIsInvalid={setIsBot}>
+        操作は無効です
+      </InvalidNotification>
     </div>
   );
 };
