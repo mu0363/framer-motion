@@ -3,28 +3,25 @@ import { useState } from "react";
 import { LabelAndError } from "../LabelAndError";
 import { ZipcodeInput } from "../ZipcodeInput";
 import type { ChangeEvent, FC } from "react";
-import type {
-  FieldValues,
-  UseFormRegisterReturn,
-  UseFormSetValue,
-} from "react-hook-form";
+import type { UseFormRegisterReturn, UseFormSetValue } from "react-hook-form";
 import { InvalidNotification } from "@components/Common/InvalidNotification";
-import { MembershipSchemaType } from "@libs/zodSchema";
 
 type Zipcode = {
   main: string;
   sub: string;
 };
 
-type Props<T extends FieldValues> = {
+type Props = {
   registerZipMain: UseFormRegisterReturn;
   registerZipSub: UseFormRegisterReturn;
   registerAddress: UseFormRegisterReturn;
-  setValue: UseFormSetValue<T>;
+  // FIXME: any削除
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  setValue: UseFormSetValue<any>;
   errorMessage?: string;
 };
 
-export const ZipcodeFiled: FC<Props<MembershipSchemaType>> = ({
+export const AddressFiled: FC<Props> = ({
   registerZipMain,
   registerZipSub,
   registerAddress,
@@ -57,7 +54,6 @@ export const ZipcodeFiled: FC<Props<MembershipSchemaType>> = ({
       if (res.data.results === null) {
         setIsLoading(false);
         setIsInvalid(true);
-        // alert("住所の取得に失敗しました。");
       }
 
       if (res.data.results) {

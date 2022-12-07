@@ -1,3 +1,4 @@
+import { AddressFiled } from "../atom/AddressFiled";
 import { PrimaryButton } from "../atom/PrimaryButton";
 import { RadioInput } from "../atom/RadioInput";
 import { TextArea } from "../atom/TextArea";
@@ -12,8 +13,15 @@ type Props = { formUID: string };
 
 /** @package */
 export const EventForm: FC<Props> = ({ formUID }) => {
-  const { errors, register, onSubmit, handleSubmit, isBot, setIsBot } =
-    useFormOnSubmit<EventSchemaType>({ schema: EventSchema, formUID });
+  const {
+    errors,
+    register,
+    onSubmit,
+    handleSubmit,
+    setValue,
+    isBot,
+    setIsBot,
+  } = useFormOnSubmit<EventSchemaType>({ schema: EventSchema, formUID });
 
   return (
     <div>
@@ -42,15 +50,12 @@ export const EventForm: FC<Props> = ({ formUID }) => {
             maxLength={100}
             type="email"
           />
-          <TextInput
-            label="住所"
-            id="address"
-            placeholder="東京都○○区"
-            register={register("address")}
+          <AddressFiled
+            registerZipMain={register("zipcodeMain")}
+            registerZipSub={register("zipcodeSub")}
+            registerAddress={register("address")}
+            setValue={setValue}
             errorMessage={errors.address?.message}
-            isRequired
-            maxLength={100}
-            type="text"
           />
           <TextInput
             label="電話番号"

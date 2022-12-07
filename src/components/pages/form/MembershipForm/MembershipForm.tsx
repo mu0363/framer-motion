@@ -1,8 +1,8 @@
+import { AddressFiled } from "../atom/AddressFiled";
 import { PrimaryButton } from "../atom/PrimaryButton";
 import { RadioInput } from "../atom/RadioInput";
 import { TextArea } from "../atom/TextArea";
 import { TextInput } from "../atom/TextInput";
-import { ZipcodeFiled } from "../atom/ZipcodeFiled";
 import type { FC } from "react";
 import { InvalidNotification } from "@components/Common/InvalidNotification";
 import { useFormOnSubmit } from "@hooks/useFormOnSubmit";
@@ -53,7 +53,7 @@ export const MembershipForm: FC<Props> = ({ formUID }) => {
             maxLength={100}
             type="email"
           />
-          <ZipcodeFiled
+          <AddressFiled
             registerZipMain={register("zipcodeMain")}
             registerZipSub={register("zipcodeSub")}
             registerAddress={register("address")}
