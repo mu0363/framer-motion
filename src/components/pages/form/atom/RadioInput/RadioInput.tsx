@@ -10,7 +10,7 @@ type Props = {
 /** @package */
 export const RadioInput: FC<Props> = ({ register, types }) => {
   return (
-    <div className="flex items-center space-x-3">
+    <div className="grid grid-cols-3 gap-2 lg:grid-cols-5">
       {types.map((type) => (
         <div key={type.id} className="flex items-center">
           <input

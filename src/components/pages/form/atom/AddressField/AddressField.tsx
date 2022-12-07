@@ -18,15 +18,19 @@ type Props = {
   // FIXME: any削除
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   setValue: UseFormSetValue<any>;
-  errorMessage?: string;
+  zipcodeErrorMessage?: string;
+  addressErrorMessage?: string;
+  isRequired: boolean;
 };
 
-export const AddressFiled: FC<Props> = ({
+export const AddressField: FC<Props> = ({
   registerZipMain,
   registerZipSub,
   registerAddress,
   setValue,
-  errorMessage = "",
+  zipcodeErrorMessage = "",
+  addressErrorMessage = "",
+  isRequired,
 }) => {
   const [zipcode, setZipcode] = useState<Zipcode>({
     main: "",
@@ -69,12 +73,11 @@ export const AddressFiled: FC<Props> = ({
 
   return (
     <div>
-      <div className="mb-2 flex items-center space-x-4">
-        <div className="flex items-center space-x-1">
-          <span className="text-sm font-bold md:text-base">郵便番号</span>
-          <span className="text-xl text-red-700">*</span>
-        </div>
-      </div>
+      <LabelAndError
+        label="郵便番号"
+        errorMessage={zipcodeErrorMessage}
+        isRequired={isRequired}
+      />
       <div className="mb-6 flex items-center space-x-2">
         <ZipcodeInput
           id="zipcode-main"
@@ -94,18 +97,21 @@ export const AddressFiled: FC<Props> = ({
           onChange={updateZipcodeSub}
         />
       </div>
-      <label htmlFor="address">
-        <LabelAndError label="住所" errorMessage={errorMessage} isRequired />
-        <input
-          id="address"
-          className="relative block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder:text-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-          placeholder={isLoading ? "検索中です..." : "東京都○○区"}
-          disabled={!!isLoading}
-          maxLength={100}
-          type="text"
-          {...registerAddress}
-        />
-      </label>
+
+      <LabelAndError
+        label="住所"
+        errorMessage={addressErrorMessage}
+        isRequired
+      />
+      <input
+        id="address"
+        className="relative block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder:text-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+        placeholder={isLoading ? "検索中です..." : "東京都○○区"}
+        disabled={!!isLoading}
+        maxLength={100}
+        type="text"
+        {...registerAddress}
+      />
 
       <InvalidNotification isInvalid={isInvalid} setIsInvalid={setIsInvalid}>
         住所の取得に失敗しました。

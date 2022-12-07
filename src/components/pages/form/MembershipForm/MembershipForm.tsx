@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { AddressFiled } from "../atom/AddressFiled";
+import { AddressField } from "../atom/AddressField";
 import { BDDatePicker } from "../atom/BDDatePicker";
 import { PrimaryButton } from "../atom/PrimaryButton";
 import { RadioInput } from "../atom/RadioInput";
@@ -55,12 +55,14 @@ export const MembershipForm: FC<Props> = ({ formUID }) => {
             maxLength={100}
             type="email"
           />
-          <AddressFiled
+          <AddressField
+            zipcodeErrorMessage={errors.zipcodeMain?.message}
+            addressErrorMessage={errors.address?.message}
+            isRequired
             registerZipMain={register("zipcodeMain")}
             registerZipSub={register("zipcodeSub")}
             registerAddress={register("address")}
             setValue={setValue}
-            errorMessage={errors.address?.message}
           />
           <TextInput
             label="電話番号"
