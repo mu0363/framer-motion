@@ -13,22 +13,26 @@ const NameEmailSchema = z.object({
     .max(100, { message: "100文字以内で入力してください。" }),
 });
 
-// 住所と電話番号の共通スキーマ
-const AddressPhoneSchema = z.object({
+// 住所スキーマ
+const AddressSchema = z.object({
   zipcodeMain: z
     .string()
     .regex(/^[0-9]*$/, { message: "半角数字で入力してください。" })
-    .min(3)
-    .max(3),
+    .min(3, { message: "必須項目です。" })
+    .max(3, { message: "必須項目です。" }),
   zipcodeSub: z
     .string()
     .regex(/^[0-9]*$/, { message: "半角数字で入力してください。" })
-    .min(4)
-    .max(4),
+    .min(4, { message: "必須項目です。" })
+    .max(4, { message: "必須項目です。" }),
   address: z
     .string()
     .min(1, { message: "必須項目です。" })
     .max(100, { message: "100文字以内で入力してください。" }),
+});
+
+// 電話番号スキーマ
+const PhoneSchema = z.object({
   phone: z
     .string()
     .regex(/^[0-9]*$/, { message: "半角数字で入力してください。" })
@@ -61,7 +65,6 @@ export const ContactSchema = z
     ]),
   })
   .merge(NameEmailSchema)
-  .merge(AddressPhoneSchema)
   .merge(RequiredCommentSchema);
 
 export type ContactSchemaType = z.infer<typeof ContactSchema>;
@@ -87,7 +90,8 @@ export const EventSchema = z
     ]),
   })
   .merge(NameEmailSchema)
-  .merge(AddressPhoneSchema)
+  .merge(AddressSchema)
+  .merge(PhoneSchema)
   .merge(CommentSchema);
 
 export type EventSchemaType = z.infer<typeof EventSchema>;
@@ -108,7 +112,8 @@ export const MembershipSchema = z
     ]),
   })
   .merge(NameEmailSchema)
-  .merge(AddressPhoneSchema)
+  .merge(AddressSchema)
+  .merge(PhoneSchema)
   .merge(CommentSchema);
 
 export type MembershipSchemaType = z.infer<typeof MembershipSchema>;
