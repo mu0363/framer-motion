@@ -1,3 +1,8 @@
+import type {
+  ContactSchemaType,
+  EventSchemaType,
+  MembershipSchemaType,
+} from "@libs/zodSchema";
 import type { Content } from "newt-client-js";
 
 type NewtImageType = {
@@ -43,3 +48,27 @@ export type ArticleType = Merge<
 export type CategoryType = { _id: string; category: string };
 
 export type RadioInputType = { id: number; title: string };
+
+export type WithContact = "withContact";
+export type WithEvent = "withEvent";
+export type WithMembership = "withMembership";
+
+export type NarrowSchemaType<T = WithContact> = T extends WithContact
+  ? ContactSchemaType
+  : T extends WithEvent
+  ? EventSchemaType
+  : T extends WithMembership
+  ? MembershipSchemaType
+  : never;
+
+export type AllSchemaTypes =
+  | ContactSchemaType
+  | EventSchemaType
+  | MembershipSchemaType
+  | undefined;
+
+export type ConfirmProps<T> = {
+  isOpened: boolean;
+  setIsOpened: (isOpened: boolean) => void;
+  confirmData: NarrowSchemaType<T> | undefined;
+};

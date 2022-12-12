@@ -1,10 +1,12 @@
 import { FC } from "react";
 import { AddressField } from "../atom/AddressField";
 import { BDDatePicker } from "../atom/BDDatePicker";
+import { ConfirmModal } from "../atom/ConfirmModal";
 import { PrimaryButton } from "../atom/PrimaryButton";
 import { RadioInput } from "../atom/RadioInput";
 import { TextArea } from "../atom/TextArea";
 import { TextInput } from "../atom/TextInput";
+import type { WithMembership } from "@types";
 import { InvalidNotification } from "@components/Common/InvalidNotification";
 import { useFormOnSubmit } from "@hooks/useFormOnSubmit";
 import { personTypes } from "@libs/constant";
@@ -19,10 +21,13 @@ export const MembershipForm: FC<Props> = ({ formUID }) => {
     register,
     onSubmit,
     handleSubmit,
-    setValue,
-    control,
+    confirmData,
+    setIsOpened,
+    isOpened,
     isBot,
     setIsBot,
+    setValue,
+    control,
   } = useFormOnSubmit<MembershipSchemaType>({
     schema: MembershipSchema,
     formUID,
@@ -88,12 +93,17 @@ export const MembershipForm: FC<Props> = ({ formUID }) => {
             errorMessage={errors.content?.message}
             isRequired={false}
           />
-          <PrimaryButton title="送信" />
+          <PrimaryButton title="確認" type="submit" />
         </div>
       </form>
       <InvalidNotification isInvalid={isBot} setIsInvalid={setIsBot}>
         操作は無効です
       </InvalidNotification>
+      <ConfirmModal<WithMembership>
+        isOpened={isOpened}
+        setIsOpened={setIsOpened}
+        confirmData={confirmData}
+      />
     </div>
   );
 };

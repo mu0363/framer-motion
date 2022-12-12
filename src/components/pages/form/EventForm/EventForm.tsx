@@ -1,8 +1,10 @@
 import { AddressField } from "../atom/AddressField";
+import { ConfirmModal } from "../atom/ConfirmModal";
 import { PrimaryButton } from "../atom/PrimaryButton";
 import { RadioInput } from "../atom/RadioInput";
 import { TextArea } from "../atom/TextArea";
 import { TextInput } from "../atom/TextInput";
+import type { WithEvent } from "@types";
 import type { FC } from "react";
 import { InvalidNotification } from "@components/Common/InvalidNotification";
 import { useFormOnSubmit } from "@hooks/useFormOnSubmit";
@@ -18,9 +20,12 @@ export const EventForm: FC<Props> = ({ formUID }) => {
     register,
     onSubmit,
     handleSubmit,
-    setValue,
+    confirmData,
+    setIsOpened,
+    isOpened,
     isBot,
     setIsBot,
+    setValue,
   } = useFormOnSubmit<EventSchemaType>({ schema: EventSchema, formUID });
 
   return (
@@ -83,12 +88,17 @@ export const EventForm: FC<Props> = ({ formUID }) => {
             errorMessage={errors.content?.message}
             isRequired={false}
           />
-          <PrimaryButton title="送信" />
+          <PrimaryButton title="確認する" type="submit" />
         </div>
       </form>
       <InvalidNotification isInvalid={isBot} setIsInvalid={setIsBot}>
         操作は無効です
       </InvalidNotification>
+      <ConfirmModal<WithEvent>
+        isOpened={isOpened}
+        setIsOpened={setIsOpened}
+        confirmData={confirmData}
+      />
     </div>
   );
 };

@@ -1,19 +1,31 @@
+import { ConfirmModal } from "../atom/ConfirmModal";
 import { PrimaryButton } from "../atom/PrimaryButton";
 import { RadioInput } from "../atom/RadioInput";
 import { TextArea } from "../atom/TextArea";
 import { TextInput } from "../atom/TextInput";
+import type { ContactSchemaType } from "@libs/zodSchema";
+import type { WithContact } from "@types";
 import type { FC } from "react";
 import { InvalidNotification } from "@components/Common/InvalidNotification";
 import { useFormOnSubmit } from "@hooks/useFormOnSubmit";
 import { personTypes } from "@libs/constant";
-import { ContactSchema, ContactSchemaType } from "@libs/zodSchema";
+import { ContactSchema } from "@libs/zodSchema";
 
 type Props = { formUID: string };
 
 /** @package */
 export const ContactForm: FC<Props> = ({ formUID }) => {
-  const { errors, register, onSubmit, handleSubmit, isBot, setIsBot } =
-    useFormOnSubmit<ContactSchemaType>({ schema: ContactSchema, formUID });
+  const {
+    errors,
+    register,
+    onSubmit,
+    handleSubmit,
+    confirmData,
+    setIsOpened,
+    isOpened,
+    isBot,
+    setIsBot,
+  } = useFormOnSubmit<ContactSchemaType>({ schema: ContactSchema, formUID });
 
   return (
     <>
@@ -52,12 +64,17 @@ export const ContactForm: FC<Props> = ({ formUID }) => {
             errorMessage={errors.content?.message}
             isRequired
           />
-          <PrimaryButton title="送信" />
+          <PrimaryButton title="確認" type="submit" />
         </div>
       </form>
       <InvalidNotification isInvalid={isBot} setIsInvalid={setIsBot}>
         操作は無効です
       </InvalidNotification>
+      <ConfirmModal<WithContact>
+        isOpened={isOpened}
+        setIsOpened={setIsOpened}
+        confirmData={confirmData}
+      />
     </>
   );
 };

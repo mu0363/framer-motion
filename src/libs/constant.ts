@@ -9,7 +9,7 @@ export const personTypes: RadioInputType[] = [
 ];
 
 export const guestTypes: RadioInputType[] = [
-  { id: 1, title: "本人会員 " },
+  { id: 1, title: "本人会員" },
   { id: 2, title: "家族会員" },
   { id: 3, title: "賛助会員" },
   { id: 4, title: "非会員本人" },

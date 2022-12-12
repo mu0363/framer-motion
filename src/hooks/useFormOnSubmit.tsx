@@ -24,6 +24,8 @@ export const useFormOnSubmit = <T extends FieldValues>({
   } = useForm<T>({
     resolver: zodResolver(schema),
   });
+  const [isOpened, setIsOpened] = useState(false);
+  const [confirmData, setConfirmData] = useState<T>();
   const [isBot, setIsBot] = useState(false);
   const { executeRecaptcha } = useGoogleReCaptcha();
 
@@ -50,7 +52,8 @@ export const useFormOnSubmit = <T extends FieldValues>({
       if (res.status === 200) {
         // botでなければnewtに問い合わせ内容を送信
         console.log(formUID);
-        console.log(data);
+        setIsOpened(true);
+        setConfirmData(data);
 
         // axios.post(
         //   `https://${process.env.NEXT_PUBLIC_SPACE_UID}.form.newt.so/v1/${formUID}`,
@@ -78,5 +81,8 @@ export const useFormOnSubmit = <T extends FieldValues>({
     isBot,
     setIsBot,
     setValue,
+    confirmData,
+    setIsOpened,
+    isOpened,
   };
 };
