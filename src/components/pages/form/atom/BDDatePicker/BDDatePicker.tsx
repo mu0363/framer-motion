@@ -1,5 +1,6 @@
 import "dayjs/locale/ja";
 import { DatePicker } from "@mantine/dates";
+import { useMediaQuery } from "@mantine/hooks";
 import { IconCalendar } from "@tabler/icons";
 import { Control, Controller } from "react-hook-form";
 import { LabelAndError } from "../LabelAndError";
@@ -20,6 +21,7 @@ export const BDDatePicker: FC<Props> = ({
   errorMessage = "",
   isRequired,
 }) => {
+  const isMobile = useMediaQuery("(max-width: 755px)");
   return (
     <div>
       <LabelAndError
@@ -32,13 +34,14 @@ export const BDDatePicker: FC<Props> = ({
         name="birthday"
         render={({ field: { onChange, value } }) => (
           <DatePicker
+            sx={{ fontSize: "16px" }}
             locale="ja"
             placeholder="生年月日を選択してください"
             inputFormat="YYYY年MM月DD日"
             onChange={onChange}
             value={value}
             icon={<IconCalendar size={16} />}
-            dropdownType="modal"
+            dropdownType={isMobile ? "modal" : "popover"}
             firstDayOfWeek="sunday"
           />
         )}
