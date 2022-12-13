@@ -1,8 +1,8 @@
 import { FC } from "react";
 import { AddressField } from "../atom/AddressField";
 import { BDDatePicker } from "../atom/BDDatePicker";
+import { ConfirmButton } from "../atom/ConfirmButton";
 import { ConfirmModal } from "../atom/ConfirmModal";
-import { PrimaryButton } from "../atom/PrimaryButton";
 import { RadioInput } from "../atom/RadioInput";
 import { TextArea } from "../atom/TextArea";
 import { TextInput } from "../atom/TextInput";
@@ -12,10 +12,8 @@ import { useFormOnSubmit } from "@hooks/useFormOnSubmit";
 import { personTypes } from "@libs/constant";
 import { MembershipSchema, MembershipSchemaType } from "@libs/zodSchema";
 
-type Props = { formUID: string };
-
 /** @package */
-export const MembershipForm: FC<Props> = ({ formUID }) => {
+export const MembershipForm: FC = () => {
   const {
     errors,
     register,
@@ -30,7 +28,6 @@ export const MembershipForm: FC<Props> = ({ formUID }) => {
     control,
   } = useFormOnSubmit<MembershipSchemaType>({
     schema: MembershipSchema,
-    formUID,
   });
 
   return (
@@ -93,7 +90,7 @@ export const MembershipForm: FC<Props> = ({ formUID }) => {
             errorMessage={errors.content?.message}
             isRequired={false}
           />
-          <PrimaryButton title="確認" type="submit" />
+          <ConfirmButton>確認する</ConfirmButton>
         </div>
       </form>
       <InvalidNotification isInvalid={isBot} setIsInvalid={setIsBot}>

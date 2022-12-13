@@ -1,6 +1,6 @@
 import { AddressField } from "../atom/AddressField";
+import { ConfirmButton } from "../atom/ConfirmButton";
 import { ConfirmModal } from "../atom/ConfirmModal";
-import { PrimaryButton } from "../atom/PrimaryButton";
 import { RadioInput } from "../atom/RadioInput";
 import { TextArea } from "../atom/TextArea";
 import { TextInput } from "../atom/TextInput";
@@ -11,10 +11,8 @@ import { useFormOnSubmit } from "@hooks/useFormOnSubmit";
 import { guestTypes, numberOfGuestTypes } from "@libs/constant";
 import { EventSchema, EventSchemaType } from "@libs/zodSchema";
 
-type Props = { formUID: string };
-
 /** @package */
-export const EventForm: FC<Props> = ({ formUID }) => {
+export const EventForm: FC = () => {
   const {
     errors,
     register,
@@ -26,7 +24,7 @@ export const EventForm: FC<Props> = ({ formUID }) => {
     isBot,
     setIsBot,
     setValue,
-  } = useFormOnSubmit<EventSchemaType>({ schema: EventSchema, formUID });
+  } = useFormOnSubmit<EventSchemaType>({ schema: EventSchema });
 
   return (
     <div>
@@ -88,7 +86,7 @@ export const EventForm: FC<Props> = ({ formUID }) => {
             errorMessage={errors.content?.message}
             isRequired={false}
           />
-          <PrimaryButton title="確認する" type="submit" />
+          <ConfirmButton>確認する</ConfirmButton>
         </div>
       </form>
       <InvalidNotification isInvalid={isBot} setIsInvalid={setIsBot}>

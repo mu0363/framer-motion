@@ -1,10 +1,11 @@
 // FIXME: コンポーネントを出し分ける
 /* eslint-disable no-nested-ternary */
 import { Modal } from "@mantine/core";
+import { useCallback, useState } from "react";
 import { ConfirmContactField } from "../ConfirmContactField";
 import { ConfirmEventField } from "../ConfirmEventField";
 import { ConfirmMembershipField } from "../ConfirmMembershipField";
-import { PrimaryButton } from "../PrimaryButton";
+import { SubmitButton } from "../SubmitButton";
 import type {
   AllSchemaTypes,
   ConfirmProps,
@@ -13,37 +14,42 @@ import type {
   WithEvent,
   WithMembership,
 } from "@types";
+import { InvalidNotification } from "@components/Common/InvalidNotification";
 
 /** @package */
 export const ConfirmModal = <T,>(props: ConfirmProps<T>) => {
   const { isOpened, setIsOpened, confirmData } = props;
+  const [isError, setIsError] = useState(true);
 
-  const isContact = (
-    data: AllSchemaTypes
-  ): data is NarrowSchemaType<WithContact> => {
-    if (data !== undefined && "person" in data) {
-      return true;
-    }
-    return false;
-  };
+  const isContact = useCallback(
+    (data: AllSchemaTypes): data is NarrowSchemaType<WithContact> => {
+      if (data !== undefined && "person" in data) {
+        return true;
+      }
+      return false;
+    },
+    []
+  );
 
-  const isEvent = (
-    data: AllSchemaTypes
-  ): data is NarrowSchemaType<WithEvent> => {
-    if (data !== undefined && "guest" in data) {
-      return true;
-    }
-    return false;
-  };
+  const isEvent = useCallback(
+    (data: AllSchemaTypes): data is NarrowSchemaType<WithEvent> => {
+      if (data !== undefined && "guest" in data) {
+        return true;
+      }
+      return false;
+    },
+    []
+  );
 
-  const isMembership = (
-    data: AllSchemaTypes
-  ): data is NarrowSchemaType<WithMembership> => {
-    if (data !== undefined && "birthday" in data) {
-      return true;
-    }
-    return false;
-  };
+  const isMembership = useCallback(
+    (data: AllSchemaTypes): data is NarrowSchemaType<WithMembership> => {
+      if (data !== undefined && "birthday" in data) {
+        return true;
+      }
+      return false;
+    },
+    []
+  );
 
   return (
     <Modal
@@ -66,8 +72,12 @@ export const ConfirmModal = <T,>(props: ConfirmProps<T>) => {
           <ConfirmContactField {...confirmData} />
         ) : null}
       </div>
-
-      <PrimaryButton title="送信する" type="button" confirmData={confirmData} />
+      <InvalidNotification isInvalid={isError} setIsInvalid={setIsError}>
+        メールの送信に失敗しました
+      </InvalidNotification>
+      <SubmitButton confirmData={confirmData} setIsError={setIsError}>
+        送信するよ
+      </SubmitButton>
     </Modal>
   );
 };

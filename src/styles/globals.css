@@ -17,7 +17,7 @@
     @apply mb-1 text-xs text-gray-500 lg:text-sm;
   }
   .data-field {
-    @apply text-sm lg:text-base;
+    @apply text-sm lg:text-base whitespace-pre-line;
   }
 
   .grecaptcha-badge {

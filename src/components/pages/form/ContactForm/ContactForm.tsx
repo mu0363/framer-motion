@@ -1,5 +1,5 @@
+import { ConfirmButton } from "../atom/ConfirmButton";
 import { ConfirmModal } from "../atom/ConfirmModal";
-import { PrimaryButton } from "../atom/PrimaryButton";
 import { RadioInput } from "../atom/RadioInput";
 import { TextArea } from "../atom/TextArea";
 import { TextInput } from "../atom/TextInput";
@@ -11,10 +11,8 @@ import { useFormOnSubmit } from "@hooks/useFormOnSubmit";
 import { personTypes } from "@libs/constant";
 import { ContactSchema } from "@libs/zodSchema";
 
-type Props = { formUID: string };
-
 /** @package */
-export const ContactForm: FC<Props> = ({ formUID }) => {
+export const ContactForm: FC = () => {
   const {
     errors,
     register,
@@ -25,7 +23,7 @@ export const ContactForm: FC<Props> = ({ formUID }) => {
     isOpened,
     isBot,
     setIsBot,
-  } = useFormOnSubmit<ContactSchemaType>({ schema: ContactSchema, formUID });
+  } = useFormOnSubmit<ContactSchemaType>({ schema: ContactSchema });
 
   return (
     <>
@@ -64,7 +62,7 @@ export const ContactForm: FC<Props> = ({ formUID }) => {
             errorMessage={errors.content?.message}
             isRequired
           />
-          <PrimaryButton title="確認" type="submit" />
+          <ConfirmButton>確認する</ConfirmButton>
         </div>
       </form>
       <InvalidNotification isInvalid={isBot} setIsInvalid={setIsBot}>

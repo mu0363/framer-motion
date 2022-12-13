@@ -8,13 +8,9 @@ import { ZodSchema } from "zod";
 
 type Props = {
   schema: ZodSchema;
-  formUID: string;
 };
 
-export const useFormOnSubmit = <T extends FieldValues>({
-  schema,
-  formUID,
-}: Props) => {
+export const useFormOnSubmit = <T extends FieldValues>({ schema }: Props) => {
   const {
     register,
     handleSubmit,
@@ -50,20 +46,9 @@ export const useFormOnSubmit = <T extends FieldValues>({
       });
 
       if (res.status === 200) {
-        // botでなければnewtに問い合わせ内容を送信
-        console.log(formUID);
+        // botでなければ問い合わせ内容をセット
         setIsOpened(true);
         setConfirmData(data);
-
-        // axios.post(
-        //   `https://${process.env.NEXT_PUBLIC_SPACE_UID}.form.newt.so/v1/${formUID}`,
-        //   data,
-        //   {
-        //     headers: {
-        //       Accept: "application/json",
-        //     },
-        //   }
-        // );
       } else {
         setIsBot(true);
       }

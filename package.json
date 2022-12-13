@@ -20,6 +20,8 @@
     "@mantine/modals": "^5.9.2",
     "@mantine/next": "^5.8.0",
     "@next/font": "^13.0.5",
+    "@sendgrid/helpers": "^7.7.0",
+    "@sendgrid/mail": "^7.7.0",
     "@tabler/icons": "^1.112.0",
     "@tailwindcss/typography": "^0.5.8",
     "axios": "^1.2.0",

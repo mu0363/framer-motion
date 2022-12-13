@@ -26,7 +26,9 @@ export const ConfirmContactField: FC<ContactSchemaType> = ({
       </div>
       <hr />
       <div>
-        <p className="mb-1 text-xs text-gray-500">お問い合わせ内容</p>
+        <p className="mb-1 whitespace-nowrap text-xs text-gray-500">
+          お問い合わせ内容
+        </p>
         <p className="data-field">{content}</p>
       </div>
     </>

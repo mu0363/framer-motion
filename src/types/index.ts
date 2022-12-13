@@ -53,6 +53,8 @@ export type WithContact = "withContact";
 export type WithEvent = "withEvent";
 export type WithMembership = "withMembership";
 
+export type FormType = "contact" | "event" | "membership";
+
 export type NarrowSchemaType<T = WithContact> = T extends WithContact
   ? ContactSchemaType
   : T extends WithEvent

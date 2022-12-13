@@ -16,7 +16,7 @@ export const InvalidNotification: FC<Props> = ({
   return (
     <div>
       {isInvalid && (
-        <div className="mt-10">
+        <div className="my-10">
           <Notification
             icon={<IconX size={18} />}
             color="red"

@@ -14,5 +14,8 @@ declare namespace NodeJS {
     readonly NEXT_PUBLIC_CONTACT_FORM_UID: string;
     readonly NEXT_PUBLIC_EVENT_FORM_UID: string;
     readonly NEXT_PUBLIC_MEMBERSHIP_FORM_UID: string;
+    readonly SENDGRID_API_KEY: string;
+    readonly MAIL_TO: string;
+    readonly MAIL_FROM: string;
   }
 }
