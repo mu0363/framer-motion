@@ -1,3 +1,4 @@
+import { ReactNode } from "react";
 import type {
   ContactSchemaType,
   EventSchemaType,
@@ -72,5 +73,11 @@ export type AllSchemaTypes =
 export type ConfirmProps<T> = {
   isOpened: boolean;
   setIsOpened: (isOpened: boolean) => void;
+  confirmData: NarrowSchemaType<T> | undefined;
+};
+
+export type SubmitProps<T> = {
+  children: ReactNode;
+  setIsError: (isError: boolean) => void;
   confirmData: NarrowSchemaType<T> | undefined;
 };

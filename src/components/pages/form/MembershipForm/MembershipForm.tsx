@@ -7,7 +7,6 @@ import { RadioInput } from "../atom/RadioInput";
 import { TextArea } from "../atom/TextArea";
 import { TextInput } from "../atom/TextInput";
 import type { WithMembership } from "@types";
-import { InvalidNotification } from "@components/Common/InvalidNotification";
 import { useFormOnSubmit } from "@hooks/useFormOnSubmit";
 import { personTypes } from "@libs/constant";
 import { MembershipSchema, MembershipSchemaType } from "@libs/zodSchema";
@@ -22,8 +21,6 @@ export const MembershipForm: FC = () => {
     confirmData,
     setIsOpened,
     isOpened,
-    isBot,
-    setIsBot,
     setValue,
     control,
   } = useFormOnSubmit<MembershipSchemaType>({
@@ -93,9 +90,6 @@ export const MembershipForm: FC = () => {
           <ConfirmButton>確認する</ConfirmButton>
         </div>
       </form>
-      <InvalidNotification isInvalid={isBot} setIsInvalid={setIsBot}>
-        操作は無効です
-      </InvalidNotification>
       <ConfirmModal<WithMembership>
         isOpened={isOpened}
         setIsOpened={setIsOpened}

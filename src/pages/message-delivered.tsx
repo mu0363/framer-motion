@@ -1,15 +1,10 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
+import React from "react";
 import { MainLayout } from "src/components/Layout/MainLayout";
 
 const MessageDelivered = () => {
   const router = useRouter();
-  useEffect(() => {
-    setTimeout(() => {
-      router.push("/");
-    }, 4000);
-  });
 
   return (
     <>
@@ -22,6 +17,9 @@ const MessageDelivered = () => {
       <MainLayout>
         <section className="mb-20 md:mb-40">
           <h2>送信完了しました</h2>
+          <button type="button" onClick={() => router.push("/")}>
+            戻る
+          </button>
         </section>
       </MainLayout>
     </>

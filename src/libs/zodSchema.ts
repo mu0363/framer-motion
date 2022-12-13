@@ -116,4 +116,21 @@ export const MembershipSchema = z
   .merge(PhoneSchema)
   .merge(CommentSchema);
 
+export const MembershipServerSchema = z
+  .object({
+    birthday: z
+      .string()
+      .min(1, { message: "必須項目です。" })
+      .max(20, { message: "20文字で入力してください。" }),
+    person: z.union([
+      z.literal("患者本人"),
+      z.literal("家族"),
+      z.literal("その他"),
+    ]),
+  })
+  .merge(NameEmailSchema)
+  .merge(AddressSchema)
+  .merge(PhoneSchema)
+  .merge(CommentSchema);
+
 export type MembershipSchemaType = z.infer<typeof MembershipSchema>;

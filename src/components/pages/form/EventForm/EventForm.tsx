@@ -6,7 +6,6 @@ import { TextArea } from "../atom/TextArea";
 import { TextInput } from "../atom/TextInput";
 import type { WithEvent } from "@types";
 import type { FC } from "react";
-import { InvalidNotification } from "@components/Common/InvalidNotification";
 import { useFormOnSubmit } from "@hooks/useFormOnSubmit";
 import { guestTypes, numberOfGuestTypes } from "@libs/constant";
 import { EventSchema, EventSchemaType } from "@libs/zodSchema";
@@ -21,8 +20,6 @@ export const EventForm: FC = () => {
     confirmData,
     setIsOpened,
     isOpened,
-    isBot,
-    setIsBot,
     setValue,
   } = useFormOnSubmit<EventSchemaType>({ schema: EventSchema });
 
@@ -89,9 +86,6 @@ export const EventForm: FC = () => {
           <ConfirmButton>確認する</ConfirmButton>
         </div>
       </form>
-      <InvalidNotification isInvalid={isBot} setIsInvalid={setIsBot}>
-        操作は無効です
-      </InvalidNotification>
       <ConfirmModal<WithEvent>
         isOpened={isOpened}
         setIsOpened={setIsOpened}

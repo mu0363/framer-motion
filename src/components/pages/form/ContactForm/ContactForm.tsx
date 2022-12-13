@@ -6,7 +6,6 @@ import { TextInput } from "../atom/TextInput";
 import type { ContactSchemaType } from "@libs/zodSchema";
 import type { WithContact } from "@types";
 import type { FC } from "react";
-import { InvalidNotification } from "@components/Common/InvalidNotification";
 import { useFormOnSubmit } from "@hooks/useFormOnSubmit";
 import { personTypes } from "@libs/constant";
 import { ContactSchema } from "@libs/zodSchema";
@@ -21,8 +20,6 @@ export const ContactForm: FC = () => {
     confirmData,
     setIsOpened,
     isOpened,
-    isBot,
-    setIsBot,
   } = useFormOnSubmit<ContactSchemaType>({ schema: ContactSchema });
 
   return (
@@ -65,9 +62,6 @@ export const ContactForm: FC = () => {
           <ConfirmButton>確認する</ConfirmButton>
         </div>
       </form>
-      <InvalidNotification isInvalid={isBot} setIsInvalid={setIsBot}>
-        操作は無効です
-      </InvalidNotification>
       <ConfirmModal<WithContact>
         isOpened={isOpened}
         setIsOpened={setIsOpened}

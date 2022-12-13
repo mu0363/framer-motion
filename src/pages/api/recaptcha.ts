@@ -45,7 +45,6 @@ const handler = async (
         throw new Error("Invalid data");
       }
 
-      //
       if (!parsedResponseJsonRecaptcha.success) {
         res.status(400).json({
           status: "failure",
