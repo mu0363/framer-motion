@@ -7,10 +7,11 @@ import type { FormType, SubmitProps } from "@types";
 import { isContact, isEvent, isMembership } from "@libs/function";
 
 export const SubmitButton = <T,>(props: SubmitProps<T>) => {
-  const { children, setIsError, confirmData } = props;
+  const { children, confirmData, setIsError, setIsVisible } = props;
   const { executeRecaptcha } = useGoogleReCaptcha();
   const router = useRouter();
   const handleSubmit = async () => {
+    setIsVisible(true);
     try {
       if (!executeRecaptcha) {
         return;
@@ -69,9 +70,11 @@ export const SubmitButton = <T,>(props: SubmitProps<T>) => {
         router.push("/message-delivered");
       } else {
         setIsError(true);
+        setIsVisible(false);
       }
     } catch (error) {
       setIsError(true);
+      setIsVisible(false);
     }
   };
 

@@ -1,6 +1,6 @@
 // FIXME: コンポーネントを出し分ける
 /* eslint-disable no-nested-ternary */
-import { Modal } from "@mantine/core";
+import { Modal, LoadingOverlay } from "@mantine/core";
 import { useState } from "react";
 import { ConfirmContactField } from "../ConfirmContactField";
 import { ConfirmEventField } from "../ConfirmEventField";
@@ -14,6 +14,7 @@ import { isContact, isEvent, isMembership } from "@libs/function";
 export const ConfirmModal = <T,>(props: ConfirmProps<T>) => {
   const { isOpened, setIsOpened, confirmData } = props;
   const [isError, setIsError] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   return (
     <Modal
@@ -27,6 +28,7 @@ export const ConfirmModal = <T,>(props: ConfirmProps<T>) => {
       onClose={() => setIsOpened(false)}
       title="以下の内容で送信しますか?"
     >
+      <LoadingOverlay visible={isVisible} overlayBlur={2} />
       <div className="my-4 grid gap-3">
         {isMembership(confirmData) ? (
           <ConfirmMembershipField {...confirmData} />
@@ -39,7 +41,11 @@ export const ConfirmModal = <T,>(props: ConfirmProps<T>) => {
       <InvalidNotification isInvalid={isError} setIsInvalid={setIsError}>
         メールの送信に失敗しました
       </InvalidNotification>
-      <SubmitButton confirmData={confirmData} setIsError={setIsError}>
+      <SubmitButton
+        confirmData={confirmData}
+        setIsError={setIsError}
+        setIsVisible={setIsVisible}
+      >
         送信するよ
       </SubmitButton>
     </Modal>

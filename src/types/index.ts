@@ -78,6 +78,7 @@ export type ConfirmProps<T> = {
 
 export type SubmitProps<T> = {
   children: ReactNode;
-  setIsError: (isError: boolean) => void;
   confirmData: NarrowSchemaType<T> | undefined;
+  setIsError: (isError: boolean) => void;
+  setIsVisible: (isVisible: boolean) => void;
 };
