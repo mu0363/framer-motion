@@ -45,29 +45,36 @@ export const AddressField: FC<Props> = ({
 
   const updateZipcodeSub = async (e: ChangeEvent<HTMLInputElement>) => {
     setZipcode({ ...zipcode, sub: e.target.value });
-    if (e.target.value.length === 4 && zipcode.main.length === 3) {
-      setIsLoading(true);
-      setIsInvalid(false);
-      setValue("address", "");
-      const res = await axios.get("https://zipcloud.ibsnet.co.jp/api/search", {
-        params: {
-          zipcode: zipcode.main + e.target.value,
-        },
-      });
-
-      if (res.data.results === null) {
-        setIsLoading(false);
-        setIsInvalid(true);
-      }
-
-      if (res.data.results) {
-        setIsLoading(false);
-        const result = res.data.results[0];
-        setValue(
-          "address",
-          `${result.address1}${result.address2}${result.address3}`
+    try {
+      if (e.target.value.length === 4 && zipcode.main.length === 3) {
+        setIsLoading(true);
+        setIsInvalid(false);
+        setValue("address", "");
+        const res = await axios.get(
+          "https://zipcloud.ibsnet.co.jp/api/search",
+          {
+            params: {
+              zipcode: zipcode.main + e.target.value,
+            },
+          }
         );
+
+        if (res.data.results === null) {
+          setIsLoading(false);
+          setIsInvalid(true);
+        }
+
+        if (res.data.results) {
+          setIsLoading(false);
+          const result = res.data.results[0];
+          setValue(
+            "address",
+            `${result.address1}${result.address2}${result.address3}`
+          );
+        }
       }
+    } catch (error) {
+      setIsLoading(false);
     }
   };
 
