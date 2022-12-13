@@ -14,7 +14,7 @@ const Contact = () => {
 
       <MainLayout>
         <section className="mb-20 md:mb-40">
-          <ContactForm formUID={process.env.NEXT_PUBLIC_CONTACT_FORM_UID} />
+          <ContactForm />
         </section>
       </MainLayout>
     </>

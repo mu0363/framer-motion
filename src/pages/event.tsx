@@ -14,7 +14,7 @@ const Event = () => {
 
       <MainLayout>
         <section className="mb-20 md:mb-40">
-          <EventForm formUID={process.env.NEXT_PUBLIC_EVENT_FORM_UID} />
+          <EventForm />
         </section>
       </MainLayout>
     </>

@@ -14,9 +14,7 @@ const Membership = () => {
 
       <MainLayout>
         <section className="mb-20 md:mb-40">
-          <MembershipForm
-            formUID={process.env.NEXT_PUBLIC_MEMBERSHIP_FORM_UID}
-          />
+          <MembershipForm />
         </section>
       </MainLayout>
     </>
