@@ -53,7 +53,7 @@ const ArticleDetail: NextPage<ArticleType> = ({
 
 export const getStaticPaths: GetStaticPaths<{ id: string }> = async () => {
   const { items } = await newtClient.getContents<ArticleType>({
-    appUid: process.env.NEWT_APP_UID,
+    appUid: process.env.NEWT_ARTICLE_APP_UID,
     modelUid: process.env.NEWT_ARTICLE_UID,
   });
   const ids = items.map((item) => `/article/content/${item._id}`);
@@ -72,7 +72,7 @@ export const getStaticProps: GetStaticProps<
     return { notFound: true };
   }
   const data = await newtClient.getContent<ArticleType>({
-    appUid: process.env.NEWT_APP_UID,
+    appUid: process.env.NEWT_ARTICLE_APP_UID,
     modelUid: process.env.NEWT_ARTICLE_UID,
     contentId: ctx.params.contentId,
   });

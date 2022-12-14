@@ -6,6 +6,12 @@ import type {
 } from "@libs/zodSchema";
 import type { Content } from "newt-client-js";
 
+export type CategoryType = {
+  _id: Content["_id"];
+  _sys: Content["_sys"];
+  category: string;
+};
+
 type NewtImageType = {
   _id: string;
   altText: string;
@@ -40,13 +46,23 @@ export type ArticleType = Merge<
       fullName: string;
       biography: string;
     };
-    categories: [
-      { _id: Content["_id"]; _sys: Content["_sys"]; category: string }
-    ];
+    categories: CategoryType[];
   }
 >;
 
-export type CategoryType = { _id: string; category: string };
+export type QAType = Merge<
+  Content & {
+    question: string;
+    answer: string;
+    category: CategoryType;
+  }
+>;
+
+export type SortedQAListType = {
+  id: number;
+  title: string;
+  contents: QAType[];
+};
 
 export type RadioInputType = { id: number; title: string };
 

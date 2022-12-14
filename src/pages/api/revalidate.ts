@@ -18,7 +18,7 @@ const handler: NextApiHandler = async (
     const parsedRequest = requestData.parse(req);
     const { _id } = parsedRequest.body;
     const { total } = await newtClient.getContents<ArticleType>({
-      appUid: process.env.NEWT_APP_UID,
+      appUid: process.env.NEWT_ARTICLE_APP_UID,
       modelUid: process.env.NEWT_ARTICLE_UID,
       query: {
         select: ["_id"],

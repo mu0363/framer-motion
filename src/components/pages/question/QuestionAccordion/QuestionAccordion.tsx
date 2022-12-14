@@ -1,16 +1,10 @@
 /* eslint-disable react/no-array-index-key */
 import { Group, Accordion, ThemeIcon } from "@mantine/core";
 import type { FC } from "react";
-
-type QuestionContent = {
-  id: number;
-  image: string;
-  label: string;
-  description: string;
-};
+import { QAType } from "@types";
 
 type Props = {
-  contents: QuestionContent[];
+  contents: QAType[];
 };
 
 /** @package */
@@ -19,25 +13,23 @@ export const QuestionAccordion: FC<Props> = ({ contents }) => {
     <div className="mb-10">
       <Accordion chevronPosition="right" variant="contained">
         {contents.map((content) => {
-          const { id, label, description } = content;
+          const { answer, question, _id } = content;
 
           return (
-            <Accordion.Item value={id.toString()} key={label}>
+            <Accordion.Item value={_id} key={question}>
               <Accordion.Control>
                 <Group noWrap>
                   <ThemeIcon radius="xl" variant="outline" size="sm">
                     ?
                   </ThemeIcon>
-                  <p className="text-gray-800 md:text-lg">{label}</p>
+                  <p className="text-gray-800 md:text-lg">{question}</p>
                 </Group>
               </Accordion.Control>
               <Accordion.Panel>
-                {description.split("\n").map((splitDescription) => (
-                  <p key={splitDescription} className="text-sm md:text-base">
-                    {splitDescription}
-                    <br />
-                  </p>
-                ))}
+                <div
+                  className="text-sm leading-5 lg:text-base lg:leading-8"
+                  dangerouslySetInnerHTML={{ __html: answer }}
+                />
               </Accordion.Panel>
             </Accordion.Item>
           );

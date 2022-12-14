@@ -90,7 +90,7 @@ const ArticlePage: NextPage<Props> = ({ articles, categories, pageRange }) => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const { total } = await newtClient.getContents<ArticleType>({
-    appUid: process.env.NEWT_APP_UID,
+    appUid: process.env.NEWT_ARTICLE_APP_UID,
     modelUid: process.env.NEWT_ARTICLE_UID,
     query: {
       select: ["_id"],
@@ -113,7 +113,7 @@ export const getStaticProps: GetStaticProps<Props> = async (ctx) => {
   const { pageId } = ctx.params;
 
   const { items, total } = await newtClient.getContents<ArticleType>({
-    appUid: process.env.NEWT_APP_UID,
+    appUid: process.env.NEWT_ARTICLE_APP_UID,
     modelUid: process.env.NEWT_ARTICLE_UID,
     query: {
       limit: PER_PAGE,
@@ -122,7 +122,7 @@ export const getStaticProps: GetStaticProps<Props> = async (ctx) => {
   });
 
   const { items: categories } = await newtClient.getContents<CategoryType>({
-    appUid: process.env.NEWT_APP_UID,
+    appUid: process.env.NEWT_ARTICLE_APP_UID,
     modelUid: process.env.NEWT_CATEGORY_UID,
     query: {
       select: ["_id", "category"],
