@@ -25,7 +25,7 @@ export const ContactForm: FC = () => {
   return (
     <>
       <form
-        className="mt-8 w-full px-5 md:mx-auto xl:w-1/2"
+        className="mt-8 w-full md:mx-auto xl:w-1/2"
         onSubmit={handleSubmit(onSubmit)}
       >
         <div className="flex flex-col space-y-6">

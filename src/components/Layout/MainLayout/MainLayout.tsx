@@ -12,7 +12,9 @@ export const MainLayout: FC<Props> = ({ children }) => {
     <div className="text-gray-800">
       <Header />
       <div className="h-14 md:h-24" />
-      <main className="mx-auto h-full max-w-7xl">{children}</main>
+      <main className="mx-auto h-full max-w-7xl">
+        <section className="mx-5 lg:mx-20">{children}</section>
+      </main>
       <Footer />
     </div>
   );

@@ -1,8 +1,9 @@
-import { Pagination } from "@mantine/core";
+import { Pagination, Anchor, Breadcrumbs } from "@mantine/core";
+import { FC } from "react";
 import { ArticleCardList } from "../ArticleCardList/ArticleCardList";
 import { CategoryAside } from "../CategoryAside";
 import type { ArticleType, CategoryType } from "@types";
-import type { FC } from "react";
+import { useBreadcrumbs } from "@hooks/useBreadcrumbs";
 
 type Props = {
   articles: ArticleType[];
@@ -20,8 +21,18 @@ export const ArticleCardListPage: FC<Props> = ({
   currentPage,
   handlePaginate,
 }) => {
+  const { breadcrumbsItems, categoryName } = useBreadcrumbs(categories);
+
   return (
-    <section className="mx-5 flex flex-col lg:mx-20">
+    <div className="flex flex-col">
+      <Breadcrumbs className="my-10 text-xs">
+        {breadcrumbsItems.map((item) => (
+          <Anchor href={item.href} key={item.id}>
+            {item.title}
+          </Anchor>
+        ))}
+        {categoryName || "記事一覧"}
+      </Breadcrumbs>
       <div className="mb-20 flex flex-col-reverse lg:grid lg:grid-cols-6">
         <CategoryAside categories={categories} />
         <ArticleCardList articles={articles} />
@@ -37,6 +48,6 @@ export const ArticleCardListPage: FC<Props> = ({
           onChange={handlePaginate}
         />
       </div>
-    </section>
+    </div>
   );
 };

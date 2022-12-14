@@ -13,9 +13,9 @@ const Event = () => {
       </Head>
 
       <MainLayout>
-        <section className="mb-20 md:mb-40">
+        <div className="mb-20 md:mb-40">
           <EventForm />
-        </section>
+        </div>
       </MainLayout>
     </>
   );

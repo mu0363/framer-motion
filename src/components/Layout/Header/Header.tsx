@@ -10,7 +10,7 @@ export const Header: FC = () => {
   const [opened, setOpened] = useState(false);
   const title = opened ? "Close navigation" : "Open navigation";
   return (
-    <header className="fixed top-0 left-0 z-10 h-14 w-full items-center justify-center border-b bg-white p-3 md:flex md:h-24 md:p-8">
+    <header className="fixed top-0 left-0 z-10 h-14 w-full items-center justify-center border-b bg-white p-3 shadow-md md:flex md:h-24 md:p-8">
       <Link href="/" title="home" className="hidden md:flex">
         <BugAntIcon className="mr-10 h-7 cursor-pointer transition hover:scale-105 hover:text-green-500 md:h-10" />
       </Link>

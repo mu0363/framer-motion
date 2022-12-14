@@ -1,7 +1,9 @@
+import { Anchor, Breadcrumbs } from "@mantine/core";
 import { parseISO, format } from "date-fns";
 import Head from "next/head";
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import type { ArticleType } from "src/types";
+import { useBreadcrumbs } from "@hooks/useBreadcrumbs";
 import { Badge } from "src/components/Badge";
 import { MainLayout } from "src/components/Layout/MainLayout";
 import { newtClient } from "src/libs/newtClient";
@@ -14,6 +16,8 @@ const ArticleDetail: NextPage<ArticleType> = ({
   categories,
   author,
 }) => {
+  const { breadcrumbsItems } = useBreadcrumbs(categories);
+
   return (
     <>
       <Head>
@@ -23,29 +27,34 @@ const ArticleDetail: NextPage<ArticleType> = ({
       </Head>
 
       <MainLayout>
-        <section className="mx-5">
-          <div className="h-10 md:h-36" />
-          <div className="md: mb-4 flex flex-col items-start md:flex-row-reverse md:items-center md:justify-end">
-            <Badge text={categories[0].category} />
-            <h1 className="mt-2 text-2xl font-bold md:mr-4 md:mt-0 md:text-4xl">
-              {title}
-            </h1>
-          </div>
-          <div className="mb-16 flex items-center space-x-2 md:flex">
-            <span className="text-base">{author.fullName}</span>
-            <span className="text-sm text-gray-500">
-              {format(parseISO(publishedAt), "yyyy年MM月dd日")}
-            </span>
-          </div>
-          <div
-            className="prose my-16 text-sm md:my-24 lg:text-xl"
-            dangerouslySetInnerHTML={{ __html: body }}
-          />
-          <div className="mb-12 rounded-md border p-5 md:mb-24 md:p-10">
-            <p className="font-bold">{author.fullName}</p>
-            <p className="mt-2 text-xs">{author.biography}</p>
-          </div>
-        </section>
+        <Breadcrumbs className="my-10 text-xs">
+          {breadcrumbsItems.map((item) => (
+            <Anchor href={item.href} key={item.id}>
+              {item.title}
+            </Anchor>
+          ))}
+          {title}
+        </Breadcrumbs>
+        <div className="md: mb-4 flex flex-col items-start md:flex-row-reverse md:items-center md:justify-end">
+          <Badge text={categories[0].category} />
+          <h1 className="mt-2 text-2xl font-bold md:mr-4 md:mt-0 md:text-4xl">
+            {title}
+          </h1>
+        </div>
+        <div className="mb-16 flex items-center space-x-2 md:flex">
+          <span className="text-base">{author.fullName}</span>
+          <span className="text-sm text-gray-500">
+            {format(parseISO(publishedAt), "yyyy年MM月dd日")}
+          </span>
+        </div>
+        <div
+          className="prose my-16 text-sm md:my-24 lg:text-xl"
+          dangerouslySetInnerHTML={{ __html: body }}
+        />
+        <div className="mb-12 rounded-md border p-5 md:mb-24 md:p-10">
+          <p className="font-bold">{author.fullName}</p>
+          <p className="mt-2 text-xs">{author.biography}</p>
+        </div>
       </MainLayout>
     </>
   );
