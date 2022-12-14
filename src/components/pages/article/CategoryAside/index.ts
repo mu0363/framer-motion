@@ -1,0 +1,1 @@
+export { CategoryAside } from "./CategoryAside";
