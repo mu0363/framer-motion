@@ -10,7 +10,7 @@ type Props = {
 /** @package */
 export const CategoryAside: FC<Props> = ({ categories }) => {
   return (
-    <div className="hidden grid-rows-1 lg:col-span-1 lg:inline-block">
+    <div className="grid-rows-1 lg:col-span-1">
       <p className="mb-10 text-lg font-bold">記事カテゴリ</p>
       <div className="flex flex-col space-y-3">
         {categories.map((item) => (

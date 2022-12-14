@@ -23,5 +23,5 @@ export const useBreadcrumbs = (categories: CategoryType[]) => {
     }
   }, [router]);
 
-  return { breadcrumbsItems, categoryName };
+  return { breadcrumbsItems, categoryName, path: router.asPath };
 };

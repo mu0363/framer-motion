@@ -14,5 +14,6 @@ declare namespace NodeJS {
     readonly SENDGRID_API_KEY: string;
     readonly MAIL_TO: string;
     readonly MAIL_FROM: string;
+    readonly NEXT_PUBLIC_DOMAIN: string;
   }
 }

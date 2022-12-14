@@ -33,11 +33,13 @@ export const ArticleCardListPage: FC<Props> = ({
         ))}
         {categoryName || "記事一覧"}
       </Breadcrumbs>
-      <div className="mb-20 flex flex-col-reverse lg:grid lg:grid-cols-6">
-        <CategoryAside categories={categories} />
+      <div className="mb-16 flex flex-col-reverse lg:grid lg:grid-cols-6">
+        <div className="hidden lg:inline-block">
+          <CategoryAside categories={categories} />
+        </div>
         <ArticleCardList articles={articles} />
       </div>
-      <div className="mx-auto mb-20">
+      <div className="mx-auto mb-16">
         <Pagination
           initialPage={1}
           total={pageRange}
@@ -47,6 +49,9 @@ export const ArticleCardListPage: FC<Props> = ({
           siblings={2}
           onChange={handlePaginate}
         />
+      </div>
+      <div className="mb-16 lg:hidden">
+        <CategoryAside categories={categories} />
       </div>
     </div>
   );
