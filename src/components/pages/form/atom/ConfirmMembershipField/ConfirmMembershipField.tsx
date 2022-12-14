@@ -29,6 +29,7 @@ export const ConfirmMembershipField: FC<MembershipSchemaType> = ({
       <div>
         <p className="label-field">郵便番号</p>
         <span className="data-field">{zipcodeMain}</span>
+        <span>-</span>
         <span className="data-field">{zipcodeSub}</span>
       </div>
       <hr />

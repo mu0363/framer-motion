@@ -134,3 +134,4 @@ export const MembershipServerSchema = z
   .merge(CommentSchema);
 
 export type MembershipSchemaType = z.infer<typeof MembershipSchema>;
+export type MembershipServerSchemaType = z.infer<typeof MembershipServerSchema>;

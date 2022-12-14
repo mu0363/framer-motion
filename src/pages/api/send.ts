@@ -1,8 +1,15 @@
 import sgMail from "@sendgrid/mail";
-import type { EmailData } from "@sendgrid/helpers/classes/email-address";
 import type { MailDataRequired } from "@sendgrid/mail";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { indention } from "@libs/function";
+import {
+  indention,
+  contactMessageToStaff,
+  contactMessageToCustomer,
+  eventMessageToStaff,
+  eventMessageToCustomer,
+  membershipMessageToStaff,
+  membershipMessageToCustomer,
+} from "@libs/function";
 import {
   ContactSchema,
   EventSchema,
@@ -15,120 +22,87 @@ export default async function handler(
 ) {
   sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
-  // 入会
+  /**
+   * 入会メール
+   */
   if (req.body.formType === "membership") {
     const perseContactRequest = MembershipServerSchema.parse(req.body);
-    const {
-      name,
-      email,
-      zipcodeSub,
-      zipcodeMain,
-      address,
-      phone,
-      person,
-      birthday,
-      content,
-    } = perseContactRequest;
-    const indentedContent = indention(content);
-    const message: MailDataRequired = {
-      to: process.env.MAIL_TO.split(" "),
-      from: process.env.MAIL_FROM as EmailData,
-      subject: "【JAAC / 入会】新着メッセージを受信しました",
-      text: `${name}さんからのお申し込み`,
-      html: `
-        <p>以下の入会お申し込みがありました。</p>
-        <hr />
-        <span>お名前: ${name} 様</span>
-        <p>メールアドレス: ${email}</p>
-        <p>電話番号: ${phone}</p>
-        <p>郵便番号: ${zipcodeMain}-${zipcodeSub}</p>
-        <p>住所: ${address}</p>
-        <p>対象: ${person}</p>
-        <p>生年月日: ${birthday}</p>
-        <br />
-        <p>連絡事項: </p>
-        <p>${indentedContent}</p>
-          `,
-    };
+    const indentedContent = indention(perseContactRequest.content);
+
+    // 役員メッセージ
+    const forStaffMessage: MailDataRequired = membershipMessageToStaff({
+      ...perseContactRequest,
+      indentedContent,
+    });
+    // 返信メッセージ
+    const forCustomerMessage: MailDataRequired = membershipMessageToCustomer({
+      ...perseContactRequest,
+      indentedContent,
+    });
+
+    // メール配信
     try {
-      await sgMail.send(message);
-      res.status(200).send(message);
+      await sgMail.send(forStaffMessage);
+      await sgMail.send(forCustomerMessage);
+      res.status(200).send(forStaffMessage);
     } catch (err) {
       console.error(err);
       res.status(500).send(err);
     }
   }
 
-  // イベント案内
+  /**
+   * イベント案内メール
+   */
   if (req.body.formType === "event") {
     const perseContactRequest = EventSchema.parse(req.body);
-    const {
-      name,
-      email,
-      zipcodeSub,
-      zipcodeMain,
-      address,
-      phone,
-      guest,
-      numberOfGuest,
-      content,
-    } = perseContactRequest;
-    const indentedContent = indention(content);
-    const message: MailDataRequired = {
-      to: process.env.MAIL_TO.split(" "),
-      from: process.env.MAIL_FROM as EmailData,
-      subject: "【JAAC / イベント案内】新着メッセージを受信しました",
-      text: `${name}さんからのお申し込み`,
-      html: `
-        <p>以下のイベントお申し込みがありました。</p>
-        <hr />
-        <span>お名前: ${name} 様</span>
-        <p>メールアドレス: ${email}</p>
-        <p>電話番号: ${phone}</p>
-        <p>郵便番号: ${zipcodeMain}-${zipcodeSub}</p>
-        <p>住所: ${address}</p>
-        <p>参加者: ${guest}</p>
-        <p>参加人数: ${numberOfGuest}</p>
-        <br />
-        <p>連絡事項: </p>
-        <p>${indentedContent}</p>
-          `,
-    };
+    const indentedContent = indention(perseContactRequest.content);
+
+    // 役員メッセージ
+    const forStaffMessage: MailDataRequired = eventMessageToStaff({
+      ...perseContactRequest,
+      indentedContent,
+    });
+    // 返信メッセージ
+    const forCustomerMessage: MailDataRequired = eventMessageToCustomer({
+      ...perseContactRequest,
+      indentedContent,
+    });
+
+    // メール配信
     try {
-      await sgMail.send(message);
-      res.status(200).send(message);
+      await sgMail.send(forStaffMessage);
+      await sgMail.send(forCustomerMessage);
+      res.status(200).send(forStaffMessage);
     } catch (err) {
       console.error(err);
       res.status(500).send(err);
     }
   }
 
-  // お問い合わせ
+  /**
+   * お問い合わせメール
+   */
   if (req.body.formType === "contact") {
     const perseContactRequest = ContactSchema.parse(req.body);
-    const { name, email, person, content } = perseContactRequest;
-    const indentedContent = indention(content);
-    const message: MailDataRequired = {
-      to: process.env.MAIL_TO.split(" "),
-      from: process.env.MAIL_FROM as EmailData,
-      subject: "【JAAC / お問合せ】新着メッセージを受信しました",
-      text: `${name}さんからの問い合わせ`,
-      html: `
-        <p>以下のお問い合わせがありました。</p>
-        <hr />
-        <p>お名前: ${name} 様</p>
-        <br />
-        <p>メールアドレス: ${email}</p>
-        <br />
-        <p>対象: ${person}</p>
-        <br />
-        <p>お問い合わせ内容: </p>
-        <p>${indentedContent}</p>
-          `,
-    };
+    const indentedContent = indention(perseContactRequest.content);
+
+    // 役員メッセージ
+    const forStaffMessage: MailDataRequired = contactMessageToStaff({
+      ...perseContactRequest,
+      indentedContent,
+    });
+    // 返信メッセージ
+    const forCustomerMessage: MailDataRequired = contactMessageToCustomer({
+      ...perseContactRequest,
+      indentedContent,
+    });
+
+    // メール配信
     try {
-      await sgMail.send(message);
-      res.status(200).send(message);
+      await sgMail.send(forStaffMessage);
+      await sgMail.send(forCustomerMessage);
+      res.status(200).send(forStaffMessage);
     } catch (err) {
       console.error(err);
       res.status(400).send("メールの送信に失敗しました。");
