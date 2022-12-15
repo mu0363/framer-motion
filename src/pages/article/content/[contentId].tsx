@@ -1,6 +1,5 @@
 import { parseISO, format } from "date-fns";
-import Head from "next/head";
-
+import { NextSeo } from "next-seo";
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import type { ArticleType } from "src/types";
 import { CommonBreadcrumbs } from "@components/pages/article/CommonBreadcrumbs/CommonBreadcrumbs";
@@ -25,7 +24,7 @@ const ArticleDetail: NextPage<ArticleType> = ({
    */
   return (
     <>
-      <Head>
+      {/* <Head>
         <title>{meta.title}</title>
         <meta name="title" content={meta.title} />
         <meta name="description" content={meta.description} />
@@ -41,7 +40,22 @@ const ArticleDetail: NextPage<ArticleType> = ({
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:site" content="@JAAC" />
         <link rel="icon" href="/favicon.ico" />
-      </Head>
+      </Head> */}
+      <NextSeo
+        title={meta.title}
+        description={meta.description}
+        openGraph={{
+          type: "article",
+          title: `${meta.title}`,
+          description: `${meta.description}`,
+          url: `${process.env.NEXT_PUBLIC_DOMAIN}${path}`,
+          images: [
+            {
+              url: `${meta.ogImage.src}`,
+            },
+          ],
+        }}
+      />
 
       <MainLayout>
         <CommonBreadcrumbs breadcrumbsItems={breadcrumbsItems} title={title} />
