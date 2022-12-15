@@ -19,6 +19,7 @@ const ArticleDetail: NextPage<ArticleType> = ({
   author,
 }) => {
   const { breadcrumbsItems, path } = useBreadcrumbs(categories);
+  console.log(meta.description);
 
   return (
     <>
@@ -26,14 +27,14 @@ const ArticleDetail: NextPage<ArticleType> = ({
         <title>{meta.title}</title>
         <meta name="title" content={meta.title} />
         <meta
-          name="og:url"
+          property="og:url"
           content={`${process.env.NEXT_PUBLIC_DOMAIN}${path}`}
         />
-        <meta name="og:type" content="article" />
-        <meta name="og:title" content={meta.title} />
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content={meta.title} />
         <meta property="og:image" content={meta.ogImage.src} />
-        <meta name="og:description" content={meta.description} />
-        <meta name="og:description" content="JAAC" />
+        <meta property="og:description" content={meta.description} />
+        <meta property="og:site_name" content="JAAC" />
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:site" content="@JAAC" />
         <link rel="icon" href="/favicon.ico" />
