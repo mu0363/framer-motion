@@ -16,7 +16,7 @@ export const ArticleCard: FC<Props> = ({ title, _id, publishedAt }) => {
             <p className="w-16 text-xs text-gray-400 xl:text-sm">
               {format(parseISO(publishedAt), "yyyy.MM.dd")}
             </p>
-            <p className="truncate text-xs lg:text-base">{title}</p>
+            <p className="truncate text-xs lg:text-sm">{title}</p>
           </div>
         </div>
       </Link>
