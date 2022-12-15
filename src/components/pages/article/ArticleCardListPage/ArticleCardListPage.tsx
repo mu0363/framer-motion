@@ -1,8 +1,9 @@
-import { Pagination, Anchor, Breadcrumbs } from "@mantine/core";
-import { FC } from "react";
+import { Pagination } from "@mantine/core";
 import { ArticleCardList } from "../ArticleCardList/ArticleCardList";
 import { CategoryAside } from "../CategoryAside";
+import { CommonBreadcrumbs } from "../CommonBreadcrumbs/CommonBreadcrumbs";
 import type { ArticleType, CategoryType } from "@types";
+import type { FC } from "react";
 import { useBreadcrumbs } from "@hooks/useBreadcrumbs";
 
 type Props = {
@@ -25,15 +26,11 @@ export const ArticleCardListPage: FC<Props> = ({
 
   return (
     <div className="flex flex-col">
-      <Breadcrumbs className="my-10 text-xs">
-        {breadcrumbsItems.map((item) => (
-          <Anchor href={item.href} key={item.id}>
-            {item.title}
-          </Anchor>
-        ))}
-        {categoryName || "記事一覧"}
-      </Breadcrumbs>
-      <div className="mb-16 flex flex-col-reverse lg:grid lg:grid-cols-6">
+      <CommonBreadcrumbs
+        breadcrumbsItems={breadcrumbsItems}
+        title={categoryName}
+      />
+      <div className="mb-8 flex flex-col-reverse md:mb-16 lg:grid lg:grid-cols-6">
         <div className="hidden lg:inline-block">
           <CategoryAside categories={categories} />
         </div>

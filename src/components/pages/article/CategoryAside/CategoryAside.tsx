@@ -15,7 +15,7 @@ export const CategoryAside: FC<Props> = ({ categories }) => {
       <div className="flex flex-col space-y-3">
         {categories.map((item) => (
           <Link href={`/article/category/${item._id}/1`} key={item._id}>
-            <div className="flex items-center space-x-3 transition-transform hover:translate-x-1 hover:text-cyan-600">
+            <div className="flex items-center space-x-3 transition-transform md:hover:translate-x-1 md:hover:text-cyan-600">
               <PlayIcon className="h-2" />
               <p className="text-sm">{item.category}</p>
             </div>

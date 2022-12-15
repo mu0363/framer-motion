@@ -290,8 +290,8 @@ export const membershipMessageToCustomer = (
                         <tr>
                           <td bgcolor="#ffffff" align="left" style="padding: 24px 24px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
                             <h1 style="margin: 0 0 12px; font-size: 16px; font-weight: 400; line-height: 48px;">${name} 様</h1>
-                            <p style="margin: 0;">この度はお申し込みありがとうございます。</p>
-                            <p style="margin: 0;">以下の内容でお申し込みを受付いたしました。</p>
+                            <p style="margin: 0;">この度はJAAC入会のお申し込みありがとうございます。</p>
+                            <p style="margin: 0;">以下の内容で受付いたしました。</p>
                             <br>
                             <p style="margin: 0;">お名前: ${name} 様</p>
                             <p style="margin: 0;">メールアドレス: ${email}</p>
@@ -500,8 +500,8 @@ export const eventMessageToCustomer = (
                         <tr>
                           <td bgcolor="#ffffff" align="left" style="padding: 24px 24px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
                             <h1 style="margin: 0 0 12px; font-size: 16px; font-weight: 400; line-height: 48px;">${name} 様</h1>
-                            <p style="margin: 0;">この度はお申し込みありがとうございます。</p>
-                            <p style="margin: 0;">以下の内容でお申し込みを受付いたしました。</p>
+                            <p style="margin: 0;">この度はJAACイベント参加へのお申し込みありがとうございます。</p>
+                            <p style="margin: 0;">以下の内容で受付いたしました。</p>
                             <br>
                             <p style="margin: 0;">お名前: ${name} 様</p>
                             <p style="margin: 0;">メールアドレス: ${email}</p>
@@ -700,8 +700,8 @@ export const contactMessageToCustomer = (
                         <tr>
                           <td bgcolor="#ffffff" align="left" style="padding: 24px 24px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
                             <h1 style="margin: 0 0 12px; font-size: 16px; font-weight: 400; line-height: 48px;">${name} 様</h1>
-                            <p style="margin: 0;">この度はお問い合わせありがとうございます。</p>
-                            <p style="margin: 0;">以下の内容でお問い合わせを受付いたしました。</p>
+                            <p style="margin: 0;">この度はJAACへのお問い合わせありがとうございます。</p>
+                            <p style="margin: 0;">以下の内容で受付いたしました。</p>
                             <br>
                             <p style="margin: 0;">お名前: ${name} 様</p>
                             <p style="margin: 0;">メールアドレス: ${email}</p>

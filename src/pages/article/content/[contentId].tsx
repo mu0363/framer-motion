@@ -1,4 +1,3 @@
-import { Anchor, Breadcrumbs } from "@mantine/core";
 import { parseISO, format } from "date-fns";
 import Head from "next/head";
 import {
@@ -11,6 +10,7 @@ import {
 } from "react-share";
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import type { ArticleType } from "src/types";
+import { CommonBreadcrumbs } from "@components/pages/article/CommonBreadcrumbs/CommonBreadcrumbs";
 import { useBreadcrumbs } from "@hooks/useBreadcrumbs";
 import { Badge } from "src/components/Badge";
 import { MainLayout } from "src/components/Layout/MainLayout";
@@ -35,14 +35,7 @@ const ArticleDetail: NextPage<ArticleType> = ({
       </Head>
 
       <MainLayout>
-        <Breadcrumbs className="my-10 text-xs">
-          {breadcrumbsItems.map((item) => (
-            <Anchor href={item.href} key={item.id}>
-              {item.title}
-            </Anchor>
-          ))}
-          {title}
-        </Breadcrumbs>
+        <CommonBreadcrumbs breadcrumbsItems={breadcrumbsItems} title={title} />
         <div className="md: mb-4 flex flex-col items-start md:flex-row-reverse md:items-center md:justify-end">
           <Badge text={categories[0].category} />
           <h1 className="mt-2 text-2xl font-bold md:mr-4 md:mt-0 md:text-4xl">

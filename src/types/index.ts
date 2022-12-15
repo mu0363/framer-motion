@@ -64,6 +64,8 @@ export type SortedQAListType = {
   contents: QAType[];
 };
 
+export type BreadcrumbsItem = { id: number; title: string; href: string };
+
 export type RadioInputType = { id: number; title: string };
 
 export type WithContact = "withContact";

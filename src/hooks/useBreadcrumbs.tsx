@@ -1,11 +1,11 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import type { CategoryType } from "@types";
+import type { BreadcrumbsItem, CategoryType } from "@types";
 
 export const useBreadcrumbs = (categories: CategoryType[]) => {
-  const [breadcrumbsItems, setBreadcrumbsItems] = useState<
-    { id: number; title: string; href: string }[]
-  >([{ id: 1, title: "ホーム", href: "/" }]);
+  const [breadcrumbsItems, setBreadcrumbsItems] = useState<BreadcrumbsItem[]>([
+    { id: 1, title: "ホーム", href: "/" },
+  ]);
   const [categoryName, setCategoryName] = useState("");
   const router = useRouter();
   const paths = decodeURI(router.asPath).substring(1).split("/");
