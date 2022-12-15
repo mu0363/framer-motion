@@ -23,8 +23,9 @@ const ArticleDetail: NextPage<ArticleType> = ({
   return (
     <>
       <Head>
-        <title>{meta.title}</title>
-        <meta name="description" content={meta.description} />
+        <title>{meta.ogImage.title}</title>
+        <meta name="description" content={meta.ogImage.description} />
+        <meta property="og:image" content={meta.ogImage.src} />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
