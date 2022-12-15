@@ -15,10 +15,17 @@ export const Footer = () => {
         <hr className="h-px border-0 bg-gray-200 dark:bg-gray-700" />
       </div>
 
-      <div className="flex flex-col space-y-2 text-center text-xs text-gray-400 md:flex-row md:space-y-0 md:text-left md:text-sm">
-        <span className="mr-2">COPYRIGHT (C)2022.</span>
-        <span>John Doe CORPORATION</span>
-      </div>
+      <p>This site is protected by reCAPTCHA and the Google</p>
+      <a href="https://policies.google.com/privacy" className="mr-5">
+        Privacy Policy
+      </a>
+      <a href="https://policies.google.com/terms">Terms of Service</a>
+
+      <small>
+        This site is protected by reCAPTCHA and the Google
+        <a href="https://policies.google.com/privacy">Privacy Policy</a> and
+        <a href="https://policies.google.com/terms">Terms of Service</a> apply.
+      </small>
     </footer>
   );
 };

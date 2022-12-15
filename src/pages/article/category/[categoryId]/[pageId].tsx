@@ -1,12 +1,9 @@
-import { PlayIcon } from "@heroicons/react/24/solid";
-import { Pagination } from "@mantine/core";
 import Head from "next/head";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { useCallback, useEffect, useState } from "react";
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import type { ArticleType, CategoryType } from "src/types";
-import { ArticleCard } from "@components/pages/article/ArticleCard";
+import { ArticleCardListPage } from "@components/pages/article/ArticleCardListPage/ArticleCardListPage";
 import { PER_PAGE } from "@libs/constant";
 import { pagesRange } from "@libs/function";
 import { MainLayout } from "src/components/Layout/MainLayout";
@@ -19,12 +16,8 @@ type Props = {
   pageRange: number;
 };
 
-const ArticleCategory: NextPage<Props> = ({
-  articles,
-  categories,
-  categoryId,
-  pageRange,
-}) => {
+const ArticleCategory: NextPage<Props> = (props) => {
+  const { categoryId, ...rest } = props;
   const [currentPage, setCurrentPage] = useState(1);
   const router = useRouter();
 
@@ -48,47 +41,11 @@ const ArticleCategory: NextPage<Props> = ({
       </Head>
 
       <MainLayout>
-        <section className="mx-5 flex flex-col lg:mx-20">
-          <div className="mb-20 flex flex-col-reverse lg:grid lg:grid-cols-6">
-            <div className="hidden grid-rows-1 lg:col-span-1 lg:inline-block">
-              <p className="text-lg font-bold">記事カテゴリやで</p>
-              <p className="mb-10 text-xs text-gray-400">{categoryId}</p>
-              <div className="flex flex-col space-y-3">
-                {categories.map((item) => (
-                  <Link href={`/article/category/${item._id}/1`} key={item._id}>
-                    <div className="flex items-center space-x-3 transition-transform hover:translate-x-1 hover:text-cyan-600">
-                      <PlayIcon className="h-2" />
-                      <p className="text-sm">{item.category}</p>
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            </div>
-
-            <div className="grid-rows-5 lg:col-span-5">
-              {articles.map((item) => {
-                const { _id } = item;
-                return (
-                  <div key={_id}>
-                    <ArticleCard {...item} />
-                  </div>
-                );
-              })}
-              <hr />
-            </div>
-          </div>
-          <div className="mx-auto mb-20">
-            <Pagination
-              initialPage={1}
-              total={pageRange}
-              page={currentPage}
-              color="cyan"
-              radius="md"
-              siblings={2}
-              onChange={handlePaginate}
-            />
-          </div>
-        </section>
+        <ArticleCardListPage
+          {...rest}
+          currentPage={currentPage}
+          handlePaginate={handlePaginate}
+        />
       </MainLayout>
     </>
   );
@@ -96,7 +53,7 @@ const ArticleCategory: NextPage<Props> = ({
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const { items: categories } = await newtClient.getContents<CategoryType>({
-    appUid: process.env.NEWT_APP_UID,
+    appUid: process.env.NEWT_ARTICLE_APP_UID,
     modelUid: process.env.NEWT_CATEGORY_UID,
     query: {
       select: ["_id"],
@@ -104,7 +61,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   });
 
   const { items: articleItems } = await newtClient.getContents<ArticleType>({
-    appUid: process.env.NEWT_APP_UID,
+    appUid: process.env.NEWT_ARTICLE_APP_UID,
     modelUid: process.env.NEWT_ARTICLE_UID,
     query: {
       select: ["categories"],
@@ -148,7 +105,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
   const { pageId, categoryId } = ctx.params;
 
   const { items, total } = await newtClient.getContents<ArticleType>({
-    appUid: process.env.NEWT_APP_UID,
+    appUid: process.env.NEWT_ARTICLE_APP_UID,
     modelUid: process.env.NEWT_ARTICLE_UID,
     query: {
       limit: PER_PAGE,
@@ -158,7 +115,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
   });
 
   const { items: categories } = await newtClient.getContents<CategoryType>({
-    appUid: process.env.NEWT_APP_UID,
+    appUid: process.env.NEWT_ARTICLE_APP_UID,
     modelUid: process.env.NEWT_CATEGORY_UID,
     query: {
       select: ["_id", "category"],

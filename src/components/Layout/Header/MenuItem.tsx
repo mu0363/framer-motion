@@ -23,7 +23,9 @@ export const MenuItem: FC<Props> = ({ title, width }) => {
 
   return (
     <motion.li initial="rest" whileHover="hover" className="cursor-pointer">
-      <Link href={`/${title.toLowerCase()}`}>{title}</Link>
+      <Link href={`/${title.toLowerCase()}`} className="text-sm">
+        {title}
+      </Link>
       <motion.div variants={underbarMotion} className="h-0.5 bg-black" />
     </motion.li>
   );

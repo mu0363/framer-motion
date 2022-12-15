@@ -3,11 +3,33 @@
 @tailwind utilities;
 
 @layer base {
+  h1 {
+    @apply !font-bold md:!text-3xl !text-xl;
+  }
   h2 {
-    @apply !font-bold !text-2xl;
+    @apply !font-bold md:!text-2xl !text-lg;
   }
 
   h3 {
     @apply !font-bold !text-xl;
+  }
+}
+
+@layer components {
+  .label-field {
+    @apply mb-1 text-xs text-gray-500 lg:text-sm;
+  }
+  .data-field {
+    @apply text-sm lg:text-base whitespace-pre-line;
+  }
+
+  .grecaptcha-badge {
+    @apply hidden;
+  }
+}
+
+@layer utilities {
+  .grecaptcha-badge {
+    visibility: hidden;
   }
 }

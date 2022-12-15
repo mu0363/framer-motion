@@ -1,7 +1,7 @@
 import Head from "next/head";
 import React from "react";
+import { ContactForm } from "@components/pages/form/ContactForm";
 import { MainLayout } from "src/components/Layout/MainLayout";
-import { ContactForm } from "src/components/pages/contact/ContactForm";
 
 const Contact = () => {
   return (
@@ -13,9 +13,9 @@ const Contact = () => {
       </Head>
 
       <MainLayout>
-        <section className="mb-20 flex flex-col space-y-12 md:mb-40">
+        <div className="mb-20 md:mb-40">
           <ContactForm />
-        </section>
+        </div>
       </MainLayout>
     </>
   );

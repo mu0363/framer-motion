@@ -18,7 +18,7 @@ export const TextItem: FC<Props> = ({ text }) => {
       initial="hidden"
       animate={control}
       variants={variants}
-      className="text-center text-6xl font-bold italic text-green-300"
+      className="text-center font-bold italic text-green-300"
     >
       {text}
     </motion.h1>

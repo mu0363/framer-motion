@@ -1,0 +1,1 @@
+export { SNSShare } from "./SNSShare";
