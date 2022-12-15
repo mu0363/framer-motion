@@ -1,16 +1,10 @@
 import { parseISO, format } from "date-fns";
 import Head from "next/head";
-import {
-  FacebookShareButton,
-  LineShareButton,
-  TwitterShareButton,
-  FacebookIcon,
-  LineIcon,
-  TwitterIcon,
-} from "react-share";
+
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import type { ArticleType } from "src/types";
 import { CommonBreadcrumbs } from "@components/pages/article/CommonBreadcrumbs/CommonBreadcrumbs";
+import { SNSShare } from "@components/pages/article/SNSShare";
 import { useBreadcrumbs } from "@hooks/useBreadcrumbs";
 import { Badge } from "src/components/Badge";
 import { MainLayout } from "src/components/Layout/MainLayout";
@@ -49,31 +43,12 @@ const ArticleDetail: NextPage<ArticleType> = ({
           </span>
         </div>
         <div
-          className="prose my-16 text-sm leading-6 md:my-24 lg:text-lg lg:leading-10"
+          className="prose my-16 text-sm leading-6 md:my-24 lg:leading-10"
           dangerouslySetInnerHTML={{ __html: body }}
         />
         <hr />
-        <div className="flex items-center space-x-4 p-5 md:space-x-6 md:p-10 md:text-base">
-          <p className="text-xs font-bold text-gray-400">シェアする</p>
-          <FacebookShareButton
-            url={`${process.env.NEXT_PUBLIC_DOMAIN}${path}`}
-            quote={title}
-          >
-            <FacebookIcon size={24} round />
-          </FacebookShareButton>
-          <TwitterShareButton
-            url={`${process.env.NEXT_PUBLIC_DOMAIN}${path}`}
-            title={title}
-          >
-            <TwitterIcon size={24} round />
-          </TwitterShareButton>
-          <LineShareButton
-            url={`${process.env.NEXT_PUBLIC_DOMAIN}${path}`}
-            title={title}
-          >
-            <LineIcon size={24} round />
-          </LineShareButton>
-        </div>
+        <SNSShare path={path} title={title} />
+
         <div className="mb-12 rounded-md border p-5 md:mb-24 md:p-10">
           <p className="font-bold">{author.fullName}</p>
           <p className="mt-2 text-xs">{author.biography}</p>
