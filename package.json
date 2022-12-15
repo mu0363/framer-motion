@@ -24,6 +24,7 @@
     "@sendgrid/mail": "^7.7.0",
     "@tabler/icons": "^1.112.0",
     "@tailwindcss/typography": "^0.5.8",
+    "@types/gtag.js": "^0.0.12",
     "@vercel/og": "^0.0.21",
     "axios": "^1.2.0",
     "date-fns": "^2.29.3",

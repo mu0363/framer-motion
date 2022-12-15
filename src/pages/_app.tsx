@@ -5,10 +5,12 @@ import { DefaultSeo } from "next-seo";
 import { AppProps } from "next/app";
 import Head from "next/head";
 import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
-
 import SEO from "../../next-seo.config";
+import { GoogleAnalytics, usePageView } from "@libs/gtag";
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
+  usePageView();
+
   return (
     <>
       <Head>
@@ -33,6 +35,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
               // fontFamily: "Zen Maru Gothic",
             }}
           >
+            <GoogleAnalytics />
             <DefaultSeo {...SEO} />
             <Component {...pageProps} />
           </MantineProvider>

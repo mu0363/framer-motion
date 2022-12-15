@@ -15,5 +15,6 @@ declare namespace NodeJS {
     readonly MAIL_TO: string;
     readonly MAIL_FROM: string;
     readonly NEXT_PUBLIC_DOMAIN: string;
+    readonly NEXT_PUBLIC_GOOGLE_ANALYTICS_ID: string;
   }
 }
