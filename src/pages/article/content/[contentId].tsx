@@ -19,7 +19,6 @@ const ArticleDetail: NextPage<ArticleType> = ({
   author,
 }) => {
   const { breadcrumbsItems, path } = useBreadcrumbs(categories);
-  console.log(meta.description);
 
   return (
     <>
