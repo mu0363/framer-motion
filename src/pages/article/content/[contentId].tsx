@@ -19,12 +19,16 @@ const ArticleDetail: NextPage<ArticleType> = ({
   author,
 }) => {
   const { breadcrumbsItems, path } = useBreadcrumbs(categories);
-
+  /**
+   * OGPについて
+   * https://webdesign-trends.net/entry/12993
+   */
   return (
     <>
       <Head>
         <title>{meta.title}</title>
         <meta name="title" content={meta.title} />
+        <meta name="description" content={meta.description} />
         <meta
           property="og:url"
           content={`${process.env.NEXT_PUBLIC_DOMAIN}${path}`}
